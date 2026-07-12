@@ -1,7 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import CtaButton from "../ui/CtaButton.astro";
-import heroImage from "../../assets/images/hero-antes-depois.webp";
+import heroImage from "../../assets/images/hero/antes-depois.webp";
 ---
 
 <section
@@ -78,14 +78,16 @@ import heroImage from "../../assets/images/hero-antes-depois.webp";
     <!-- Visual LCP — priority, sem lazy -->
     <div class="order-1 lg:order-2">
       <figure class="reveal mx-auto max-w-md lg:max-w-none">
-        <div class="overflow-hidden rounded-2xl bg-slate-50 shadow-lg shadow-ink/10 ring-1 ring-slate-100">
+        <div
+          class="overflow-hidden rounded-2xl bg-slate-50 shadow-lg shadow-ink/10 ring-1 ring-slate-100"
+        >
           <Image
             src={heroImage}
             alt="Antes e depois — resultado real: de manequim 42 para 38 com o Método Ativa & Afina."
-            widths={[320, 480, 640, 800, 960]}
-            sizes="(max-width: 1024px) 90vw, 480px"
+            widths={[320, 480, 640, 800]}
+            sizes="(max-width: 1024px) 90vw, 420px"
             formats={["avif", "webp"]}
-            quality={82}
+            quality={75}
             loading="eager"
             decoding="sync"
             fetchpriority="high"

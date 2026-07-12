@@ -6,6 +6,9 @@ dist/
 # dependencies
 node_modules/
 
+# originais pesados (não vão para o deploy; use src/assets/images/*)
+images/originais/
+
 # logs
 npm-debug.log*
 yarn-debug.log*

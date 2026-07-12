@@ -47,46 +47,22 @@ Edite `src/config/site.ts`:
 checkoutUrl: "https://pay.hotmart.com/SEU_LINK",
 ```
 
-### 2. Imagens
+### 2. Imagens (já organizadas)
 
-Coloque arquivos otimizados (preferencialmente **WebP/AVIF**) em `public/images/`:
+Estrutura em `src/assets/images/`:
 
-| Arquivo sugerido | Onde usar |
-|---|---|
-| `hero-antes-depois.webp` | Hero (Foto 1) — **LCP** |
-| `passo-1-respiracao.webp` | Bloco 3, card 1 |
-| `passo-2-ativacao.webp` | Bloco 3, card 2 |
-| `passo-3-funcional.webp` | Bloco 3, card 3 |
-| `resultado-1.webp` … `4.webp` | Bloco 5 mosaico |
-| `lilian-manu-academia.webp` | Bloco 8 criadoras |
-
-Passe o caminho no componente:
-
-```astro
-<ImagePlaceholder
-  src="/images/hero-antes-depois.webp"
-  alt="..."
-  priority  <!-- só no Hero (LCP) -->
-/>
+```
+hero/antes-depois.webp
+passos/passo-1-respiracao.webp
+resultados/{maristela,lilian,natalia,manequim-42-38}.webp
+criadoras/lilian-manu.webp
 ```
 
-**Para otimização máxima com o Image do Astro**, coloque em `src/assets/` e use:
+Todas passam pelo `<Image />` do Astro (AVIF + WebP + srcset + lazy, exceto LCP no Hero).
 
-```astro
----
-import { Image } from 'astro:assets';
-import hero from '../assets/hero-antes-depois.webp';
----
-<Image
-  src={hero}
-  alt="..."
-  widths={[400, 640, 800]}
-  sizes="(max-width: 768px) 100vw, 480px"
-  formats={['avif', 'webp']}
-  loading="eager"
-  fetchpriority="high"
-/>
-```
+Originais brutos: `images/originais/` (fora do git/deploy).
+
+Para adicionar passo 2/3: coloque o WebP otimizado em `src/assets/images/passos/` e importe no `HowItWorks.astro`.
 
 ### 3. Vídeos (iframe)
 
