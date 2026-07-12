@@ -2,6 +2,9 @@
 import { Image } from "astro:assets";
 import SectionTitle from "../ui/SectionTitle.astro";
 import criadoras from "../../assets/images/criadoras/lilian-manu.webp";
+import { siteConfig } from "../../config/site";
+
+const { lilian, manu } = siteConfig.contact.creators;
 ---
 
 <section
@@ -23,7 +26,7 @@ import criadoras from "../../assets/images/criadoras/lilian-manu.webp";
       >
         <Image
           src={criadoras}
-          alt="Lilian Ferancini e Emanuela (Manu) juntas na academia — criadoras do Método Ativa & Afina."
+          alt="Lilian Ferancini e Emanuela Vieira juntas na academia — criadoras do Método Ativa & Afina."
           widths={[400, 640, 800, 1000]}
           sizes="(max-width: 1024px) 90vw, 480px"
           formats={["avif", "webp"]}
@@ -39,23 +42,73 @@ import criadoras from "../../assets/images/criadoras/lilian-manu.webp";
           class="reveal reveal-delay-1 rounded-2xl bg-white p-5 shadow-sm ring-1 ring-slate-100 sm:p-6"
         >
           <h3 class="font-display text-xl font-bold text-ink">
-            Lilian Ferancini
+            {lilian.name}
           </h3>
           <p class="mt-2 text-sm leading-relaxed text-ink-muted sm:text-base">
-            Fisioterapeuta, Professora de Educação Física, Especialista em
-            Reabilitação Abdominal.
+            {lilian.role}
           </p>
+          <a
+            href={lilian.instagram}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-teal transition-colors hover:text-teal-deep"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
+            </svg>
+            {lilian.instagramHandle}
+            <span class="sr-only"> — Instagram de {lilian.name}</span>
+          </a>
         </article>
 
         <article
           class="reveal reveal-delay-2 rounded-2xl bg-white p-5 shadow-sm ring-1 ring-slate-100 sm:p-6"
         >
           <h3 class="font-display text-xl font-bold text-ink">
-            Emanuela (Manu)
+            {manu.shortName}
           </h3>
+          <p class="text-xs font-medium text-ink-muted">{manu.name}</p>
           <p class="mt-2 text-sm leading-relaxed text-ink-muted sm:text-base">
-            Personal Trainer, Especialista em Treino Feminino.
+            {manu.role}
           </p>
+          <a
+            href={manu.instagram}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-teal transition-colors hover:text-teal-deep"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
+            </svg>
+            {manu.instagramHandle}
+            <span class="sr-only"> — Instagram de {manu.name}</span>
+          </a>
         </article>
 
         <blockquote
