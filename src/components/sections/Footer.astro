@@ -1,0 +1,39 @@
+---
+import { siteConfig } from "../../config/site";
+---
+
+<footer class="border-t border-slate-200 bg-surface py-10 sm:py-12">
+  <div class="mx-auto max-w-3xl px-4 text-center sm:px-6">
+    <nav
+      class="mb-6 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-sm text-ink-muted"
+      aria-label="Links legais"
+    >
+      <a
+        href="/politica-de-privacidade"
+        class="underline-offset-2 transition-colors hover:text-teal hover:underline"
+      >
+        Políticas de Privacidade
+      </a>
+      <span class="text-slate-300" aria-hidden="true">|</span>
+      <a
+        href="/termos-de-uso"
+        class="underline-offset-2 transition-colors hover:text-teal hover:underline"
+      >
+        Termos de Uso
+      </a>
+    </nav>
+
+    <p class="text-xs leading-relaxed text-ink-muted/90 sm:text-sm">
+      <strong class="font-semibold text-ink-muted">AVISO IMPORTANTE:</strong>
+      Os resultados prometidos nesta página dependem exclusivamente da sua
+      disciplina, foco e constância na aplicação exata do método proposto. Cada
+      organismo responde de forma individual e nós não garantimos resultados
+      milagrosos sem a devida execução e dedicação por parte da aluna.
+    </p>
+
+    <p class="mt-6 text-xs text-slate-400">
+      Copyright © {siteConfig.year}
+      {siteConfig.name}. Todos os direitos reservados.
+    </p>
+  </div>
+</footer>

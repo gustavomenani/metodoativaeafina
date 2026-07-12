@@ -1,0 +1,130 @@
+@import "tailwindcss";
+
+/* ─────────────────────────────────────────────
+   Design Tokens — Método Ativa & Afina
+   Baseado na paleta Hotmart (verde-oliva + azul-esverdeado + Amarelo Sol)
+───────────────────────────────────────────── */
+@theme {
+  --color-sun: #f5c400;
+  --color-sun-hover: #e0b200;
+  --color-sun-dark: #c99a00;
+  --color-olive: #9caf6e;
+  --color-olive-light: #c5d4a0;
+  --color-olive-soft: #e8f0d8;
+  --color-teal: #4a8a8a;
+  --color-teal-light: #6ba8a8;
+  --color-teal-soft: #d4ecec;
+  --color-teal-deep: #2f5f5f;
+  --color-ink: #1e293b;
+  --color-ink-muted: #475569;
+  --color-surface: #f8fafc;
+  --color-white: #ffffff;
+
+  --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Fraunces", ui-serif, Georgia, serif;
+}
+
+/* Base */
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--color-ink);
+  background-color: var(--color-surface);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Tipografia de destaque */
+.font-display {
+  font-family: var(--font-display);
+}
+
+/* ── CTA Pulse (nativo @keyframes) ── */
+@keyframes cta-pulse {
+  0%,
+  92%,
+  100% {
+    transform: scale(1);
+  }
+  96% {
+    transform: scale(1.02);
+  }
+}
+
+.cta-pulse {
+  animation: cta-pulse 3s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* ── Scroll Reveal (Intersection Observer) ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(1.25rem);
+  transition:
+    opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-delay-1 {
+  transition-delay: 0.1s;
+}
+.reveal-delay-2 {
+  transition-delay: 0.2s;
+}
+.reveal-delay-3 {
+  transition-delay: 0.3s;
+}
+.reveal-delay-4 {
+  transition-delay: 0.4s;
+}
+
+/* ── Carrossel mobile (sem libs) ── */
+.scrollbar-none {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+/* ── FAQ details ── */
+details summary {
+  list-style: none;
+  cursor: pointer;
+}
+details summary::-webkit-details-marker {
+  display: none;
+}
+details[open] .faq-chevron {
+  transform: rotate(180deg);
+}
+
+/* ── Acessibilidade: reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .cta-pulse {
+    animation: none;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* Focus visível para teclado */
+:focus-visible {
+  outline: 3px solid var(--color-teal);
+  outline-offset: 3px;
+}

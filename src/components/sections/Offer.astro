@@ -1,0 +1,81 @@
+---
+import CtaButton from "../ui/CtaButton.astro";
+import { siteConfig } from "../../config/site";
+---
+
+<section
+  class="relative overflow-hidden bg-teal-deep py-14 text-white sm:py-20"
+  aria-labelledby="oferta-title"
+  id="checkout"
+>
+  <div
+    class="pointer-events-none absolute -left-20 top-0 h-64 w-64 rounded-full bg-teal/40 blur-3xl"
+    aria-hidden="true"
+  >
+  </div>
+  <div
+    class="pointer-events-none absolute -right-16 bottom-0 h-56 w-56 rounded-full bg-olive/30 blur-3xl"
+    aria-hidden="true"
+  >
+  </div>
+
+  <div class="relative mx-auto max-w-xl px-4 text-center sm:px-6">
+    <p
+      class="reveal mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-olive-light"
+    >
+      Oferta de lançamento
+    </p>
+
+    <h2
+      id="oferta-title"
+      class="reveal reveal-delay-1 font-display text-2xl font-bold leading-tight sm:text-3xl md:text-4xl"
+    >
+      Garanta seu acesso ao Método Ativa &amp; Afina
+    </h2>
+
+    <div class="reveal reveal-delay-2 mt-8 rounded-3xl bg-white/10 p-6 backdrop-blur-sm sm:p-8">
+      <p class="text-sm text-white/70 sm:text-base">Preço Especial</p>
+      <p class="mt-2 text-lg text-white/60 line-through sm:text-xl">
+        De {siteConfig.price.from}
+      </p>
+      <p class="mt-1 font-display text-4xl font-bold text-sun sm:text-5xl">
+        por apenas {siteConfig.price.to}
+      </p>
+      <p class="mt-3 text-sm text-white/70">
+        Pagamento único · Acesso imediato · 1 ano de conteúdo
+      </p>
+    </div>
+
+    <div class="reveal reveal-delay-3 mt-8 flex justify-center">
+      <CtaButton
+        label="QUERO MEU ACESSO IMEDIATO AO ATIVA & AFINA"
+        size="large"
+        href={siteConfig.checkoutUrl}
+      />
+    </div>
+
+    <!-- Selo de garantia -->
+    <div
+      class="reveal reveal-delay-4 mt-8 inline-flex flex-col items-center gap-3 sm:flex-row sm:gap-4"
+    >
+      <div
+        class="flex h-20 w-20 items-center justify-center rounded-full border-4 border-sun bg-white text-center shadow-lg"
+        aria-hidden="true"
+      >
+        <div class="leading-tight">
+          <span class="block font-display text-2xl font-bold text-teal-deep"
+            >7</span
+          >
+          <span class="block text-[9px] font-bold uppercase text-ink-muted"
+            >dias</span
+          >
+        </div>
+      </div>
+      <p class="max-w-xs text-sm leading-relaxed text-white/85 sm:text-left">
+        <strong class="text-sun">Garantia Incondicional de 7 dias.</strong>
+        Se por qualquer motivo sentir que o método não é para você, basta
+        solicitar o reembolso.
+      </p>
+    </div>
+  </div>
+</section>

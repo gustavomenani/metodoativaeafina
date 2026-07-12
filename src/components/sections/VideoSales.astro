@@ -1,0 +1,49 @@
+---
+import VideoEmbed from "../ui/VideoEmbed.astro";
+import SectionTitle from "../ui/SectionTitle.astro";
+---
+
+<section
+  class="bg-surface py-14 sm:py-20"
+  aria-labelledby="video-title"
+  id="video"
+>
+  <div class="mx-auto max-w-4xl px-4 sm:px-6">
+    <SectionTitle
+      id="video-title"
+      eyebrow="Vídeo de vendas"
+      title="Descubra por que tantas mulheres treinam, fazem dieta... e continuam com a barriga estufada."
+      class="mb-8 sm:mb-10"
+    />
+
+    <div class="reveal reveal-delay-1">
+      <!--
+        VÍDEO 1min30 — Lilian e Manu
+        Substitua embedUrl, ex:
+        embedUrl="https://www.youtube.com/embed/SEU_VIDEO_ID"
+      -->
+      <VideoEmbed
+        title="Vídeo de vendas — Lilian e Manu apresentam o Método Ativa & Afina (1min30)"
+        embedUrl={undefined}
+      />
+    </div>
+
+    <div
+      class="reveal reveal-delay-2 mt-8 rounded-2xl border-l-4 border-sun bg-white p-5 shadow-sm sm:p-7"
+    >
+      <p class="text-base font-semibold leading-relaxed text-ink sm:text-lg">
+        A culpa não é sua! O erro da maioria das mulheres é achar que toda
+        barriga se resolve apenas com queima de gordura ou com centenas de
+        abdominais.
+      </p>
+    </div>
+
+    <p
+      class="reveal reveal-delay-3 mt-6 text-center text-base leading-relaxed text-ink-muted sm:text-lg"
+    >
+      Primeiro, nós reconectamos os seus músculos profundos. Nessa fase você já
+      começa a perder medidas! Imagina o resultado quando você somar isso aos
+      nossos treinos metabólicos inteligentes?
+    </p>
+  </div>
+</section>

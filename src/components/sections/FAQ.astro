@@ -1,0 +1,95 @@
+---
+import SectionTitle from "../ui/SectionTitle.astro";
+
+const faqs = [
+  {
+    q: "Quando começo a ver resultados?",
+    a: "Com consistência, muitas alunas percebem melhora na postura e firmeza abdominal a partir da 4ª semana. A partir da 6ª semana, a redução de medidas se torna mais visível.",
+  },
+  {
+    q: "Eu nunca treinei ou sou iniciante, eu consigo fazer o curso?",
+    a: "Com certeza! O método foi desenhado de forma simples e muito didática. As aulas são passo a passo para que qualquer mulher, mesmo começando do zero absoluto, consiga aprender e aplicar os exercícios corretamente.",
+  },
+  {
+    q: "Eu já treino pesado e faço dieta, esse método realmente vai me ajudar?",
+    a: "Sim! O erro da maioria das mulheres é achar que toda barriga se resolve apenas com queima de gordura ou com abdominais tradicionais. Se você treina e se alimenta bem, mas a sua barriga continua caída ou estufada para frente, o problema real está na fraqueza e na falta de ativação dos seus músculos profundos. O método vai direto na raiz do problema.",
+  },
+  {
+    q: "Eu tenho diástase, posso fazer o método?",
+    a: "Pode e deve! O Método Ativa & Afina ajuda muito você a conseguir gerir melhor a pressão interna da sua barriga e, com isso, melhorar a sua diástase de forma segura, devolvendo a firmeza que o seu abdômen perdeu.",
+  },
+  {
+    q: "Sou mãe recente, posso fazer o método?",
+    a: "Se você já passou pelo período de pós-parto inicial e foi devidamente liberada pelo seu médico nas consultas de rotina, você pode sim fazer o método. Ele é excelente para ajudar a recuperar a firmeza abdominal após a gravidez.",
+  },
+  {
+    q: "Preciso de algum equipamento?",
+    a: "Não. Você só precisa do seu corpo e de um pequeno espaço na sua casa. O método foi desenhado para ser prático e acessível.",
+  },
+  {
+    q: "Quanto tempo terei de acesso ao curso?",
+    a: "Você terá 1 ano de acesso para assistir no seu ritmo e repetir as aulas quantas vezes quiser.",
+  },
+  {
+    q: "E se eu não gostar do curso?",
+    a: "Você tem 7 dias de garantia incondicional, se por qualquer motivo sentir que o método não é para você.",
+  },
+];
+---
+
+<section
+  class="bg-white py-14 sm:py-20"
+  aria-labelledby="faq-title"
+  id="faq"
+>
+  <div class="mx-auto max-w-2xl px-4 sm:px-6">
+    <SectionTitle
+      id="faq-title"
+      eyebrow="Dúvidas"
+      title="Perguntas Frequentes"
+      class="mb-8 sm:mb-10"
+    />
+
+    <div class="space-y-3">
+      {
+        faqs.map((faq, i) => (
+          <details
+            class:list={[
+              "reveal group rounded-2xl border border-slate-100 bg-surface open:bg-olive-soft/30 open:ring-1 open:ring-olive-light/50",
+              i % 2 === 1 && "reveal-delay-1",
+            ]}
+          >
+            <summary class="flex items-center justify-between gap-3 px-4 py-4 sm:px-5 sm:py-5">
+              <span class="text-left text-sm font-semibold text-ink sm:text-base">
+                {faq.q}
+              </span>
+              <span
+                class="faq-chevron flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-teal/10 text-teal transition-transform duration-200"
+                aria-hidden="true"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="m6 9 6 6 6-6" />
+                </svg>
+              </span>
+            </summary>
+            <div class="border-t border-slate-100/80 px-4 pb-4 pt-1 sm:px-5 sm:pb-5">
+              <p class="text-sm leading-relaxed text-ink-muted sm:text-base">
+                {faq.a}
+              </p>
+            </div>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+</section>

@@ -1,0 +1,70 @@
+---
+import { Image } from "astro:assets";
+import SectionTitle from "../ui/SectionTitle.astro";
+import criadoras from "../../assets/images/criadoras-lilian-manu.webp";
+---
+
+<section
+  class="bg-surface py-14 sm:py-20"
+  aria-labelledby="criadoras-title"
+  id="criadoras"
+>
+  <div class="mx-auto max-w-5xl px-4 sm:px-6">
+    <SectionTitle
+      id="criadoras-title"
+      eyebrow="As criadoras"
+      title="Quem está por trás do Método Ativa & Afina"
+      class="mb-10 sm:mb-12"
+    />
+
+    <div class="reveal grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
+      <div
+        class="overflow-hidden rounded-2xl bg-slate-100 shadow-lg shadow-ink/10 ring-1 ring-slate-100"
+      >
+        <Image
+          src={criadoras}
+          alt="Lilian Ferancini e Emanuela (Manu) juntas na academia — criadoras do Método Ativa & Afina."
+          widths={[400, 640, 800, 1000]}
+          sizes="(max-width: 1024px) 90vw, 520px"
+          formats={["avif", "webp"]}
+          quality={82}
+          loading="lazy"
+          decoding="async"
+          class="h-auto w-full object-cover object-top"
+        />
+      </div>
+
+      <div class="space-y-6">
+        <article
+          class="reveal reveal-delay-1 rounded-2xl bg-white p-5 shadow-sm ring-1 ring-slate-100 sm:p-6"
+        >
+          <h3 class="font-display text-xl font-bold text-ink">
+            Lilian Ferancini
+          </h3>
+          <p class="mt-2 text-sm leading-relaxed text-ink-muted sm:text-base">
+            Fisioterapeuta, Professora de Educação Física, Especialista em
+            Reabilitação Abdominal.
+          </p>
+        </article>
+
+        <article
+          class="reveal reveal-delay-2 rounded-2xl bg-white p-5 shadow-sm ring-1 ring-slate-100 sm:p-6"
+        >
+          <h3 class="font-display text-xl font-bold text-ink">
+            Emanuela (Manu)
+          </h3>
+          <p class="mt-2 text-sm leading-relaxed text-ink-muted sm:text-base">
+            Personal Trainer, Especialista em Treino Feminino.
+          </p>
+        </article>
+
+        <blockquote
+          class="reveal reveal-delay-3 border-l-4 border-sun pl-4 font-display text-lg font-semibold italic leading-snug text-teal-deep sm:text-xl"
+        >
+          "A união entre a ciência e o movimento para cuidar da sua
+          autoestima."
+        </blockquote>
+      </div>
+    </div>
+  </div>
+</section>

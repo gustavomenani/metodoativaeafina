@@ -1,0 +1,58 @@
+---
+/**
+ * Placeholder de vídeo (YouTube / Vimeo / Panda / Hotmart / Vidlly).
+ * Substitua `embedUrl` pelo src do iframe real.
+ *
+ * Exemplos:
+ *   YouTube:  https://www.youtube.com/embed/VIDEO_ID
+ *   Vimeo:    https://player.vimeo.com/video/VIDEO_ID
+ */
+interface Props {
+  embedUrl?: string;
+  title: string;
+  class?: string;
+}
+
+const { embedUrl, title, class: className = "" } = Astro.props;
+---
+
+<div
+  class:list={[
+    "relative w-full overflow-hidden rounded-2xl bg-ink shadow-xl shadow-ink/10",
+    "aspect-video",
+    className,
+  ]}
+>
+  {
+    embedUrl ? (
+      <iframe
+        src={embedUrl}
+        title={title}
+        class="absolute inset-0 h-full w-full border-0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen
+        loading="lazy"
+      />
+    ) : (
+      <div class="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-gradient-to-br from-teal-deep to-ink p-6 text-center">
+        <div class="flex h-16 w-16 items-center justify-center rounded-full bg-sun/90 text-ink shadow-lg">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="28"
+            height="28"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            aria-hidden="true"
+          >
+            <path d="M8 5.14v14l11-7-11-7z" />
+          </svg>
+        </div>
+        <p class="max-w-xs text-sm font-medium text-white/90">{title}</p>
+        <p class="text-xs text-white/50">
+          PLACEHOLDER — Cole o iframe (YouTube/Vimeo/Vidlly) em{" "}
+          <code class="rounded bg-white/10 px-1">embedUrl</code>
+        </p>
+      </div>
+    )
+  }
+</div>
