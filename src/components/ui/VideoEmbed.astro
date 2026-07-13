@@ -14,10 +14,14 @@ interface Props {
   aspect?: "video" | "reels" | "square";
   class?: string;
   autoplay?: boolean;
-  /** Título na capa (ex.: "Assista este vídeo") */
+  /** Eyebrow da capa HTML (quando não há poster) */
+  coverEyebrow?: string;
+  /** Linha 1 do título na capa */
   coverTitle?: string;
-  /** Subtítulo na capa */
-  coverSubtitle?: string;
+  /** Trecho em destaque (amarelo) no título — ex.: "Ativa & Afina" */
+  coverTitleHighlight?: string;
+  /** Texto do botão CTA da capa */
+  coverCta?: string;
   /** Se false, não usa overlay de capa (só poster nativo) */
   brandedCover?: boolean;
 }
@@ -30,8 +34,10 @@ const {
   aspect = "video",
   class: className = "",
   autoplay = false,
-  coverTitle = "Assista este vídeo",
-  coverSubtitle = "Método Ativa & Afina",
+  coverEyebrow = "Descubra",
+  coverTitle = "Como funciona o",
+  coverTitleHighlight = "Método Ativa & Afina",
+  coverCta = "Assistir agora",
   brandedCover = true,
 } = Astro.props;
 
@@ -43,11 +49,12 @@ const aspectClass = {
 
 const useCover = Boolean(src) && brandedCover && !autoplay;
 const uid = `vid-${Math.random().toString(36).slice(2, 10)}`;
+const usePosterImage = Boolean(poster);
 ---
 
 <div
   class:list={[
-    "relative w-full overflow-hidden bg-ink shadow-xl shadow-ink/15",
+    "relative w-full overflow-hidden bg-[#0f2828] shadow-xl shadow-ink/15",
     aspect === "reels" ? "rounded-[1.75rem]" : "rounded-2xl",
     aspectClass,
     className,
@@ -67,7 +74,6 @@ const uid = `vid-${Math.random().toString(36).slice(2, 10)}`;
     ) : src ? (
       <>
         <video
-          id={useCover ? `${uid}-el` : undefined}
           class="absolute inset-0 h-full w-full object-cover"
           controls={!useCover}
           playsinline
@@ -85,106 +91,122 @@ const uid = `vid-${Math.random().toString(36).slice(2, 10)}`;
         {useCover && (
           <button
             type="button"
-            class="group absolute inset-0 z-10 flex flex-col items-center justify-center gap-4 bg-gradient-to-b from-teal-deep via-[#264848] to-[#162828] px-5 text-center transition-opacity duration-300 focus-visible:outline focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-sun"
+            class="group absolute inset-0 z-10 flex flex-col items-center justify-center px-5 text-center transition-opacity duration-300 focus-visible:outline focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-sun"
             data-video-cover={uid}
-            aria-label={`${coverTitle}. ${title}`}
+            aria-label={`${coverTitle} ${coverTitleHighlight}. ${title}`}
           >
-            {/* Textura de marca (círculos suaves) */}
-            <span
-              class="pointer-events-none absolute -left-16 -top-10 h-56 w-56 rounded-full bg-olive/25 blur-2xl"
-              aria-hidden="true"
-            />
-            <span
-              class="pointer-events-none absolute -bottom-10 -right-10 h-64 w-64 rounded-full bg-teal/30 blur-2xl"
-              aria-hidden="true"
-            />
-            <span
-              class="pointer-events-none absolute left-1/2 top-1/2 h-72 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full bg-sun/10 blur-3xl"
-              aria-hidden="true"
-            />
+            {usePosterImage ? (
+              /* Capa gerada (estilo da referência da cliente) */
+              <img
+                src={poster}
+                alt=""
+                width="720"
+                height="1280"
+                class="absolute inset-0 h-full w-full object-cover"
+                draggable="false"
+              />
+            ) : (
+              /* Fallback HTML no mesmo estilo da referência */
+              <span class="absolute inset-0 bg-gradient-to-b from-[#5a6e46] via-[#143333] to-[#0a1a1a]" />
+            )}
 
-            <span class="relative text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-olive-light">
-              Assista
-            </span>
-            <span
-              class="relative h-1 w-10 rounded-full bg-sun"
-              aria-hidden="true"
-            />
+            {
+              !usePosterImage && (
+                <span class="relative z-[1] flex h-full w-full flex-col items-center px-4 pt-[12%] pb-[10%]">
+                  <span class="text-[0.7rem] font-semibold uppercase tracking-[0.22em] text-[#c4cd96]">
+                    {coverEyebrow}
+                  </span>
+                  <span
+                    class="mt-2.5 h-[3px] w-9 rounded-full bg-sun"
+                    aria-hidden="true"
+                  />
 
-            <span
-              class="relative flex h-[4.5rem] w-[4.5rem] items-center justify-center rounded-full bg-white shadow-lg shadow-ink/25 ring-4 ring-sun/80 transition-transform duration-200 group-hover:scale-105 group-active:scale-95 sm:h-20 sm:w-20"
-              aria-hidden="true"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="32"
-                height="32"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                class="ml-1 text-teal-deep"
-              >
-                <path d="M8 5.14v13.72L19 12 8 5.14z" />
-              </svg>
-            </span>
+                  <span class="mt-7 max-w-[16rem]">
+                    <span class="block text-lg font-medium leading-snug text-white sm:text-xl">
+                      {coverTitle}
+                    </span>
+                    <span class="mt-1 block font-display text-xl font-bold leading-snug sm:text-2xl">
+                      {coverTitleHighlight.includes("Ativa") ? (
+                        <>
+                          <span class="text-white">Método </span>
+                          <span class="text-sun">Ativa &amp; Afina</span>
+                        </>
+                      ) : (
+                        <span class="text-white">{coverTitleHighlight}</span>
+                      )}
+                    </span>
+                  </span>
 
-            <span class="relative max-w-[14rem]">
-              <span class="block font-display text-xl font-bold leading-snug text-white sm:text-2xl">
-                {coverTitle}
-              </span>
-              {coverSubtitle && (
-                <span class="mt-2 block text-sm text-white/75">
-                  {coverSubtitle}
+                  <span class="flex flex-1 items-center justify-center">
+                    <span
+                      class="flex h-[4.75rem] w-[4.75rem] items-center justify-center rounded-full bg-white shadow-lg ring-[10px] ring-sun transition-transform duration-200 group-hover:scale-105 group-active:scale-95 sm:h-[5.25rem] sm:w-[5.25rem]"
+                      aria-hidden="true"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="34"
+                        height="34"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                        class="ml-1 text-[#0f2828]"
+                      >
+                        <path d="M8 5.14v13.72L19 12 8 5.14z" />
+                      </svg>
+                    </span>
+                  </span>
+
+                  <span class="inline-flex min-w-[14rem] items-center justify-center rounded-2xl bg-sun px-10 py-4 text-base font-bold uppercase tracking-wide text-ink shadow-md sm:min-w-[16rem] sm:text-lg">
+                    {coverCta}
+                  </span>
                 </span>
-              )}
-            </span>
+              )
+            }
 
-            <span class="relative mt-1 rounded-full bg-sun px-4 py-1.5 text-xs font-bold uppercase tracking-wide text-ink shadow-md">
-              Toque para assistir
-            </span>
-
-            <span class="relative mt-2 text-[0.7rem] font-semibold text-olive-light/90">
-              Método Ativa &amp; Afina
-            </span>
+            {/* Área clicável sempre por cima da imagem */}
+            <span class="absolute inset-0 z-[2]" aria-hidden="true" />
           </button>
         )}
       </>
     ) : (
+      /* Placeholder depoimento (sem vídeo ainda) — mesma estética */
       <div
-        class="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-gradient-to-b from-teal-deep via-[#264848] to-[#162828] px-4 text-center"
+        class="absolute inset-0"
         role="img"
         aria-label={`${title} — em breve`}
       >
-        <span
-          class="pointer-events-none absolute -left-12 -top-8 h-44 w-44 rounded-full bg-olive/25 blur-2xl"
-          aria-hidden="true"
-        />
-        <span
-          class="pointer-events-none absolute -bottom-8 -right-8 h-48 w-48 rounded-full bg-teal/30 blur-2xl"
-          aria-hidden="true"
-        />
-
-        <span class="relative text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-olive-light">
-          Em breve
-        </span>
-        <span
-          class="relative flex h-14 w-14 items-center justify-center rounded-full bg-white/15 ring-2 ring-sun/60"
-          aria-hidden="true"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="28"
-            height="28"
-            viewBox="0 0 24 24"
-            fill="currentColor"
-            class="ml-0.5 text-white"
-          >
-            <path d="M8 5.14v13.72L19 12 8 5.14z" />
-          </svg>
-        </span>
-        <p class="relative text-sm font-semibold text-white/95">
-          Depoimento em vídeo
-        </p>
-        <p class="relative text-xs text-white/70">Capa pronta · vídeo em breve</p>
+        {poster ? (
+          <img
+            src={poster}
+            alt=""
+            width="720"
+            height="1280"
+            class="absolute inset-0 h-full w-full object-cover"
+            loading="lazy"
+            decoding="async"
+          />
+        ) : (
+          <div class="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-gradient-to-b from-[#5a6e46] via-[#143333] to-[#0a1a1a] px-4 text-center">
+            <span class="text-[0.7rem] font-semibold uppercase tracking-[0.22em] text-[#c4cd96]">
+              Em breve
+            </span>
+            <span
+              class="flex h-14 w-14 items-center justify-center rounded-full bg-white ring-[8px] ring-sun"
+              aria-hidden="true"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="28"
+                height="28"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                class="ml-0.5 text-[#0f2828]"
+              >
+                <path d="M8 5.14v13.72L19 12 8 5.14z" />
+              </svg>
+            </span>
+            <p class="text-sm font-semibold text-white/95">Depoimento em vídeo</p>
+          </div>
+        )}
       </div>
     )
   }

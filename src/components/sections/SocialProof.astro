@@ -48,25 +48,29 @@ const videoTestimonials: {
   embedUrl?: string;
   poster?: string;
   coverTitle?: string;
-  coverSubtitle?: string;
+  coverTitleHighlight?: string;
+  coverCta?: string;
 }[] = [
   {
     title: "Depoimento em vídeo 1 — aluna do Método Ativa & Afina",
     poster: "/videos/depoimento-poster.webp",
-    coverTitle: "Assista o depoimento",
-    coverSubtitle: "História real de aluna",
+    coverTitle: "Veja o que nossas",
+    coverTitleHighlight: "alunas têm a dizer",
+    coverCta: "Assistir agora",
   },
   {
     title: "Depoimento em vídeo 2 — aluna do Método Ativa & Afina",
     poster: "/videos/depoimento-poster.webp",
-    coverTitle: "Assista o depoimento",
-    coverSubtitle: "História real de aluna",
+    coverTitle: "Veja o que nossas",
+    coverTitleHighlight: "alunas têm a dizer",
+    coverCta: "Assistir agora",
   },
   {
     title: "Depoimento em vídeo 3 — aluna do Método Ativa & Afina",
     poster: "/videos/depoimento-poster.webp",
-    coverTitle: "Assista o depoimento",
-    coverSubtitle: "História real de aluna",
+    coverTitle: "Veja o que nossas",
+    coverTitleHighlight: "alunas têm a dizer",
+    coverCta: "Assistir agora",
   },
 ];
 ---
@@ -175,7 +179,8 @@ const videoTestimonials: {
                 embedUrl={v.embedUrl}
                 poster={v.poster}
                 coverTitle={v.coverTitle}
-                coverSubtitle={v.coverSubtitle}
+                coverTitleHighlight={v.coverTitleHighlight}
+                coverCta={v.coverCta}
                 aspect="reels"
               />
             </div>
