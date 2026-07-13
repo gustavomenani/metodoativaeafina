@@ -22,7 +22,7 @@ const items = [
   <div class="mx-auto max-w-3xl px-4 sm:px-6">
     <SectionTitle
       id="para-quem-title"
-      eyebrow="Para quem é"
+      eyebrow="É para você?"
       title="O Método Ativa & Afina foi feito para você que:"
       class="mb-8 sm:mb-10"
     />
@@ -33,9 +33,10 @@ const items = [
           <li
             class:list={[
               "reveal flex gap-3 rounded-xl bg-white p-4 shadow-sm ring-1 ring-slate-100 sm:p-5",
-              i % 3 === 1 && "reveal-delay-1",
-              i % 3 === 2 && "reveal-delay-2",
+              // Alterna deslize esq/dir + atraso em cascata ao rolar
+              i % 2 === 0 ? "reveal-slide" : "reveal-slide-right",
             ]}
+            style={`--stagger: ${i}`}
           >
             <span
               class="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-teal text-white"

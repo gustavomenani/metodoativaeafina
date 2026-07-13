@@ -9,6 +9,11 @@ node_modules/
 # originais pesados (não vão para o deploy; use src/assets/images/*)
 images/originais/
 
+# pasta de origem 99Freelas (vídeo bruto ~267MB + originais)
+Construção*/ 
+**/Ativa e Afina - Vídeo*.mp4
+
+
 # logs
 npm-debug.log*
 yarn-debug.log*

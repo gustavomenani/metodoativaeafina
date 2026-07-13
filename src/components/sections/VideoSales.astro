@@ -11,21 +11,24 @@ import SectionTitle from "../ui/SectionTitle.astro";
   <div class="mx-auto max-w-4xl px-4 sm:px-6">
     <SectionTitle
       id="video-title"
-      eyebrow="Vídeo de vendas"
+      eyebrow="Assista"
       title="Descubra por que tantas mulheres treinam, fazem dieta... e continuam com a barriga estufada."
       class="mb-8 sm:mb-10"
     />
 
-    <div class="reveal reveal-delay-1">
-      <!--
-        VÍDEO 1min30 — Lilian e Manu
-        Substitua embedUrl, ex:
-        embedUrl="https://www.youtube.com/embed/SEU_VIDEO_ID"
-      -->
-      <VideoEmbed
-        title="Vídeo de vendas — Lilian e Manu apresentam o Método Ativa & Afina (1min30)"
-        embedUrl={undefined}
-      />
+    <div class="reveal reveal-delay-1 flex justify-center">
+      <div class="relative w-full max-w-[min(100%,22rem)] sm:max-w-[24rem]">
+        <div
+          class="rounded-[2rem] bg-gradient-to-b from-slate-200/80 to-slate-100 p-1.5 shadow-2xl shadow-ink/15 ring-1 ring-slate-200/80 sm:p-2"
+        >
+          <VideoEmbed
+            title="Lilian e Manu apresentam o Método Ativa & Afina"
+            aspect="reels"
+            src="/videos/video-vendas.mp4"
+            poster="/videos/video-vendas-poster.webp"
+          />
+        </div>
+      </div>
     </div>
 
     <div

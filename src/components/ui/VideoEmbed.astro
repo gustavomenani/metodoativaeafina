@@ -1,25 +1,40 @@
 ---
 /**
- * Placeholder de vídeo (YouTube / Vimeo / Panda / Hotmart / Vidlly).
- * Substitua `embedUrl` pelo src do iframe real.
- *
- * Exemplos:
- *   YouTube:  https://www.youtube.com/embed/VIDEO_ID
- *   Vimeo:    https://player.vimeo.com/video/VIDEO_ID
+ * Player de vídeo — iframe (YouTube/Vimeo) ou arquivo local MP4.
+ * aspect: "video" 16:9 | "reels" 9:16 | "square" 1:1
  */
 interface Props {
   embedUrl?: string;
+  src?: string;
+  poster?: string;
   title: string;
+  aspect?: "video" | "reels" | "square";
   class?: string;
+  autoplay?: boolean;
 }
 
-const { embedUrl, title, class: className = "" } = Astro.props;
+const {
+  embedUrl,
+  src,
+  poster,
+  title,
+  aspect = "video",
+  class: className = "",
+  autoplay = false,
+} = Astro.props;
+
+const aspectClass = {
+  video: "aspect-video",
+  reels: "aspect-[9/16]",
+  square: "aspect-square",
+}[aspect];
 ---
 
 <div
   class:list={[
-    "relative w-full overflow-hidden rounded-2xl bg-ink shadow-xl shadow-ink/10",
-    "aspect-video",
+    "relative w-full overflow-hidden bg-ink shadow-xl shadow-ink/15",
+    aspect === "reels" ? "rounded-[1.75rem]" : "rounded-2xl",
+    aspectClass,
     className,
   ]}
 >
@@ -33,26 +48,20 @@ const { embedUrl, title, class: className = "" } = Astro.props;
         allowfullscreen
         loading="lazy"
       />
-    ) : (
-      <div class="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-gradient-to-br from-teal-deep to-ink p-6 text-center">
-        <div class="flex h-16 w-16 items-center justify-center rounded-full bg-sun/90 text-ink shadow-lg">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="28"
-            height="28"
-            viewBox="0 0 24 24"
-            fill="currentColor"
-            aria-hidden="true"
-          >
-            <path d="M8 5.14v14l11-7-11-7z" />
-          </svg>
-        </div>
-        <p class="max-w-xs text-sm font-medium text-white/90">{title}</p>
-        <p class="text-xs text-white/50">
-          PLACEHOLDER — Cole o iframe (YouTube/Vimeo/Vidlly) em{" "}
-          <code class="rounded bg-white/10 px-1">embedUrl</code>
-        </p>
-      </div>
-    )
+    ) : src ? (
+      <video
+        class="absolute inset-0 h-full w-full object-cover"
+        controls
+        playsinline
+        preload="metadata"
+        poster={poster}
+        title={title}
+        autoplay={autoplay}
+        muted={autoplay}
+      >
+        <source src={src} type="video/mp4" />
+        Seu navegador não suporta a reprodução deste vídeo.
+      </video>
+    ) : null
   }
 </div>

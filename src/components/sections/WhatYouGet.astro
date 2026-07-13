@@ -22,6 +22,11 @@ const items = [
     title: "BÔNUS 2: Automassagem Modeladora Abdominal",
     text: "Técnica manual rápida para reduzir a retenção de líquidos, melhorar o funcionamento do intestino e ajudar a diminuir ainda mais as medidas da circunferência abdominal.",
   },
+  {
+    icon: "bonus3",
+    title: "BÔNUS 3: Guia Pós-Curso",
+    text: "Aprenda como manter sua barriga mais firme e cintura mais definida após as 8 semanas, com orientações práticas para a sua rotina.",
+  },
 ];
 ---
 
@@ -33,7 +38,7 @@ const items = [
   <div class="mx-auto max-w-4xl px-4 sm:px-6">
     <SectionTitle
       id="voce-recebe-title"
-      eyebrow="O que você recebe"
+      eyebrow="Seu acesso"
       title="O que você vai receber"
       class="mb-10 sm:mb-12"
     />
@@ -119,6 +124,22 @@ const items = [
                   <path d="M12 22V7" />
                   <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z" />
                   <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z" />
+                </svg>
+              )}
+              {item.icon === "bonus3" && (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10" />
+                  <path d="m9 12 2 2 4-4" />
                 </svg>
               )}
             </div>
