@@ -4,7 +4,7 @@
  */
 const WHATSAPP_E164 = "5532984264132";
 const WHATSAPP_MSG = encodeURIComponent(
-  "Olá! 💚 Acabei de ver a página do Método Ativa & Afina e quero garantir meu acesso. Pode me ajudar com a compra?",
+  "Olá! Acabei de ver a página do Método Ativa & Afina e quero garantir meu acesso. Pode me ajudar com a compra?",
 );
 
 const WHATSAPP_HREF_WITH_MSG = `https://wa.me/${WHATSAPP_E164}?text=${WHATSAPP_MSG}`;
