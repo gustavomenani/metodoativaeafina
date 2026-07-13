@@ -1,15 +1,18 @@
 /**
  * Configuração central da landing page.
- * Substitua checkoutUrl pelo link real da Hotmart / checkout.
+ * CTAs de compra abrem o WhatsApp com mensagem pronta.
  */
 const WHATSAPP_E164 = "5532984264132";
 const WHATSAPP_MSG = encodeURIComponent(
-  "Olá! Tenho interesse no Método Ativa & Afina.",
+  "Olá! 💚 Acabei de ver a página do Método Ativa & Afina e quero garantir meu acesso. Pode me ajudar com a compra?",
 );
+
+const WHATSAPP_HREF_WITH_MSG = `https://wa.me/${WHATSAPP_E164}?text=${WHATSAPP_MSG}`;
 
 export const siteConfig = {
   name: "Método Ativa & Afina",
-  checkoutUrl: "#checkout", // ← SUBSTITUA pelo link de checkout Hotmart
+  /** Link de compra / adquirir → WhatsApp com mensagem pronta */
+  checkoutUrl: WHATSAPP_HREF_WITH_MSG,
   year: 2026,
   price: {
     from: "R$ 197,00",
@@ -21,7 +24,7 @@ export const siteConfig = {
     whatsapp: {
       display: "(32) 98426-4132",
       href: `https://wa.me/${WHATSAPP_E164}`,
-      hrefWithMessage: `https://wa.me/${WHATSAPP_E164}?text=${WHATSAPP_MSG}`,
+      hrefWithMessage: WHATSAPP_HREF_WITH_MSG,
     },
     creators: {
       lilian: {
