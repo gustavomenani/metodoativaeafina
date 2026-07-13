@@ -6,9 +6,9 @@ Landing page de alta conversão, mobile-first e otimizada para **Core Web Vitals
 
 | Tecnologia | Uso |
 |---|---|
-| **Astro 5** | SSG estático, HTML mínimo, zero JS desnecessário |
-| **Tailwind CSS v4** | Utilitários atômicos, sem CSS flutuante |
-| **SVG inline (Lucide-style)** | Ícones sem bundle extra |
+| **Astro** | SSG estático, HTML mínimo, zero JS desnecessário |
+| **Tailwind CSS v4** | Utilitários atômicos |
+| **SVG inline** | Ícones sem bundle extra |
 | **Intersection Observer** | Scroll reveal em vanilla JS |
 | **Vercel** | Deploy estático nativo |
 
@@ -31,12 +31,6 @@ npm run preview  # pré-visualiza o build
 3. Build command: `npm run build`
 4. Output: `dist`
 
-Ou via CLI:
-
-```bash
-npx vercel
-```
-
 ## Configuração rápida
 
 ### 1. Link de checkout (Hotmart)
@@ -47,39 +41,29 @@ Edite `src/config/site.ts`:
 checkoutUrl: "https://pay.hotmart.com/SEU_LINK",
 ```
 
-### 2. Imagens (já organizadas)
+### 2. Imagens
 
 Estrutura em `src/assets/images/`:
 
 ```
 hero/antes-depois.webp
 passos/passo-1-respiracao.webp
-resultados/{maristela,lilian,natalia,manequim-42-38}.webp
+passos/passo-2-ativacao.webp
+passos/passo-3-funcional.webp
+resultados/{maristela,resultado-a,resultado-b}.webp
 criadoras/lilian-manu.webp
 ```
 
 Todas passam pelo `<Image />` do Astro (AVIF + WebP + srcset + lazy, exceto LCP no Hero).
 
-Originais brutos: `images/originais/` (fora do git/deploy).
+Materiais brutos e arquivos não usados: pasta `materiais/` (fora do git/deploy).
 
-Para adicionar passo 2/3: coloque o WebP otimizado em `src/assets/images/passos/` e importe no `HowItWorks.astro`.
+### 3. Vídeo
 
-### 3. Vídeos (iframe)
-
-Em `VideoSales.astro` e `SocialProof.astro`, passe `embedUrl`:
-
-```astro
-<VideoEmbed
-  title="Vídeo de vendas"
-  embedUrl="https://www.youtube.com/embed/VIDEO_ID"
-/>
-```
-
-Aceita YouTube, Vimeo, Panda Video, Hotmart Player, Vidlly etc.
+Arquivo em `public/videos/video-vendas.mp4` (já otimizado, ~8 MB).  
+Poster: `public/videos/video-vendas-poster.webp`.
 
 ### 4. Páginas legais
-
-Substitua o texto placeholder em:
 
 - `src/pages/politica-de-privacidade.astro`
 - `src/pages/termos-de-uso.astro`
@@ -88,16 +72,18 @@ Substitua o texto placeholder em:
 
 ```
 src/
+  assets/images/   # WebPs do site (otimizados)
   components/
-    sections/     # Blocos 1–9 + Footer
-    ui/           # CtaButton, ImagePlaceholder, VideoEmbed, SectionTitle
-  config/site.ts  # Preço, checkout, nome
-  layouts/        # Layout base (fonts, SEO, script reveal)
-  pages/          # Rotas
-  scripts/        # scroll-reveal.ts (vanilla)
-  styles/         # global.css (tokens + animações)
+    sections/      # Blocos da landing + Footer
+    ui/            # CtaButton, VideoEmbed, SectionTitle, etc.
+  config/site.ts   # Preço, checkout, nome
+  layouts/         # Layout base (fonts, SEO, script reveal)
+  pages/           # Rotas
+  scripts/         # scroll-reveal.ts
+  styles/          # global.css
 public/
-  images/         # Assets estáticos
+  videos/          # MP4 + poster
+materiais/         # Originais / arquivo (não deploya)
 ```
 
 ## Performance (checklist)
@@ -105,12 +91,14 @@ public/
 - [x] HTML estático (Astro SSG)
 - [x] CSS utilitário atômico (Tailwind)
 - [x] Único JS: scroll reveal (~1KB)
-- [x] CTA pulse em CSS puro (`@keyframes`)
+- [x] CTA pulse em CSS puro
 - [x] FAQ nativo (`<details>` / `<summary>`)
-- [x] Carrossel mobile com CSS (`snap-x`, sem Swiper)
+- [x] Carrossel mobile com CSS (`snap-x`)
 - [x] Lazy loading em imagens (exceto LCP)
 - [x] `prefers-reduced-motion` respeitado
 - [x] Fonts com `display=swap` + preconnect
+- [x] Imagens WebP redimensionadas e comprimidas
+- [x] Vídeo de vendas em 720p otimizado (~8 MB)
 
 ## Paleta
 

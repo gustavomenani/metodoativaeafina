@@ -1,29 +1,27 @@
 # Imagens do site
 
-Única fonte de imagens usadas no build (via `astro:assets` → AVIF/WebP + srcset).
+Única fonte de imagens do build (`astro:assets` → AVIF/WebP + srcset).
 
 ```
 images/
 ├── hero/
-│   └── antes-depois.webp          # LCP / Foto 1
+│   └── antes-depois.webp          # LCP / Hero
 ├── passos/
-│   └── passo-1-respiracao.webp    # Bloco 3 — passo 1
-│   # passo-2-ativacao.webp        # (adicionar quando tiver)
-│   # passo-3-funcional.webp
+│   ├── passo-1-respiracao.webp
+│   ├── passo-2-ativacao.webp
+│   └── passo-3-funcional.webp
 ├── resultados/
 │   ├── maristela.webp
-│   ├── lilian.webp
-│   └── natalia.webp
-│   # (4º card reutiliza hero/antes-depois.webp)
+│   ├── resultado-a.webp
+│   └── resultado-b.webp
 └── criadoras/
     └── lilian-manu.webp
 ```
 
-Originais brutos ficam em `/images/originais/` (ignorados no git).
+Originais e arquivos não usados ficam em `/materiais/` (fora do deploy).
 
 ## Como adicionar nova imagem
 
-1. Coloque o arquivo em `images/originais/`
-2. Otimize (WebP, largura máxima adequada à tela)
-3. Salve em uma subpasta acima
-4. Importe no componente com `import foto from '../../assets/images/...'`
+1. Original → `materiais/originais/<categoria>/`
+2. WebP otimizado (largura máx. adequada) → pasta acima
+3. Import no componente: `import foto from '../../assets/images/...'`
