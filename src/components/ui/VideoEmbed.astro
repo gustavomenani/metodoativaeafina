@@ -2,6 +2,9 @@
 /**
  * Player de vídeo — iframe (YouTube/Vimeo) ou arquivo local MP4.
  * aspect: "video" 16:9 | "reels" 9:16 | "square" 1:1
+ *
+ * Para MP4: capa de marca + clique para assistir (não mostra o frame
+ * do rosto até a aluna tocar em play).
  */
 interface Props {
   embedUrl?: string;
@@ -11,6 +14,12 @@ interface Props {
   aspect?: "video" | "reels" | "square";
   class?: string;
   autoplay?: boolean;
+  /** Título na capa (ex.: "Assista este vídeo") */
+  coverTitle?: string;
+  /** Subtítulo na capa */
+  coverSubtitle?: string;
+  /** Se false, não usa overlay de capa (só poster nativo) */
+  brandedCover?: boolean;
 }
 
 const {
@@ -21,6 +30,9 @@ const {
   aspect = "video",
   class: className = "",
   autoplay = false,
+  coverTitle = "Assista este vídeo",
+  coverSubtitle = "Método Ativa & Afina",
+  brandedCover = true,
 } = Astro.props;
 
 const aspectClass = {
@@ -28,6 +40,9 @@ const aspectClass = {
   reels: "aspect-[9/16]",
   square: "aspect-square",
 }[aspect];
+
+const useCover = Boolean(src) && brandedCover && !autoplay;
+const uid = `vid-${Math.random().toString(36).slice(2, 10)}`;
 ---
 
 <div
@@ -37,6 +52,7 @@ const aspectClass = {
     aspectClass,
     className,
   ]}
+  data-video-player={useCover ? uid : undefined}
 >
   {
     embedUrl ? (
@@ -49,27 +65,109 @@ const aspectClass = {
         loading="lazy"
       />
     ) : src ? (
-      <video
-        class="absolute inset-0 h-full w-full object-cover"
-        controls
-        playsinline
-        preload="metadata"
-        poster={poster}
-        title={title}
-        autoplay={autoplay}
-        muted={autoplay}
-      >
-        <source src={src} type="video/mp4" />
-        Seu navegador não suporta a reprodução deste vídeo.
-      </video>
+      <>
+        <video
+          id={useCover ? `${uid}-el` : undefined}
+          class="absolute inset-0 h-full w-full object-cover"
+          controls={!useCover}
+          playsinline
+          preload={useCover ? "none" : "metadata"}
+          poster={poster}
+          title={title}
+          autoplay={autoplay}
+          muted={autoplay}
+          data-video-el={useCover ? uid : undefined}
+        >
+          <source src={src} type="video/mp4" />
+          Seu navegador não suporta a reprodução deste vídeo.
+        </video>
+
+        {useCover && (
+          <button
+            type="button"
+            class="group absolute inset-0 z-10 flex flex-col items-center justify-center gap-4 bg-gradient-to-b from-teal-deep via-[#264848] to-[#162828] px-5 text-center transition-opacity duration-300 focus-visible:outline focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-sun"
+            data-video-cover={uid}
+            aria-label={`${coverTitle}. ${title}`}
+          >
+            {/* Textura de marca (círculos suaves) */}
+            <span
+              class="pointer-events-none absolute -left-16 -top-10 h-56 w-56 rounded-full bg-olive/25 blur-2xl"
+              aria-hidden="true"
+            />
+            <span
+              class="pointer-events-none absolute -bottom-10 -right-10 h-64 w-64 rounded-full bg-teal/30 blur-2xl"
+              aria-hidden="true"
+            />
+            <span
+              class="pointer-events-none absolute left-1/2 top-1/2 h-72 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full bg-sun/10 blur-3xl"
+              aria-hidden="true"
+            />
+
+            <span class="relative text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-olive-light">
+              Assista
+            </span>
+            <span
+              class="relative h-1 w-10 rounded-full bg-sun"
+              aria-hidden="true"
+            />
+
+            <span
+              class="relative flex h-[4.5rem] w-[4.5rem] items-center justify-center rounded-full bg-white shadow-lg shadow-ink/25 ring-4 ring-sun/80 transition-transform duration-200 group-hover:scale-105 group-active:scale-95 sm:h-20 sm:w-20"
+              aria-hidden="true"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="32"
+                height="32"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                class="ml-1 text-teal-deep"
+              >
+                <path d="M8 5.14v13.72L19 12 8 5.14z" />
+              </svg>
+            </span>
+
+            <span class="relative max-w-[14rem]">
+              <span class="block font-display text-xl font-bold leading-snug text-white sm:text-2xl">
+                {coverTitle}
+              </span>
+              {coverSubtitle && (
+                <span class="mt-2 block text-sm text-white/75">
+                  {coverSubtitle}
+                </span>
+              )}
+            </span>
+
+            <span class="relative mt-1 rounded-full bg-sun px-4 py-1.5 text-xs font-bold uppercase tracking-wide text-ink shadow-md">
+              Toque para assistir
+            </span>
+
+            <span class="relative mt-2 text-[0.7rem] font-semibold text-olive-light/90">
+              Método Ativa &amp; Afina
+            </span>
+          </button>
+        )}
+      </>
     ) : (
       <div
-        class="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-gradient-to-br from-teal-deep to-ink px-4 text-center"
+        class="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-gradient-to-b from-teal-deep via-[#264848] to-[#162828] px-4 text-center"
         role="img"
         aria-label={`${title} — em breve`}
       >
         <span
-          class="flex h-14 w-14 items-center justify-center rounded-full bg-white/15 ring-2 ring-white/30"
+          class="pointer-events-none absolute -left-12 -top-8 h-44 w-44 rounded-full bg-olive/25 blur-2xl"
+          aria-hidden="true"
+        />
+        <span
+          class="pointer-events-none absolute -bottom-8 -right-8 h-48 w-48 rounded-full bg-teal/30 blur-2xl"
+          aria-hidden="true"
+        />
+
+        <span class="relative text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-olive-light">
+          Em breve
+        </span>
+        <span
+          class="relative flex h-14 w-14 items-center justify-center rounded-full bg-white/15 ring-2 ring-sun/60"
           aria-hidden="true"
         >
           <svg
@@ -80,12 +178,43 @@ const aspectClass = {
             fill="currentColor"
             class="ml-0.5 text-white"
           >
-            <path d="M8 5.14v13.72L19 12 8 5.14z"></path>
+            <path d="M8 5.14v13.72L19 12 8 5.14z" />
           </svg>
         </span>
-        <p class="text-sm font-semibold text-white/95">Depoimento em vídeo</p>
-        <p class="text-xs text-white/70">Em breve</p>
+        <p class="relative text-sm font-semibold text-white/95">
+          Depoimento em vídeo
+        </p>
+        <p class="relative text-xs text-white/70">Capa pronta · vídeo em breve</p>
       </div>
     )
   }
 </div>
+
+<script>
+  function initBrandedVideoCovers() {
+    document.querySelectorAll<HTMLElement>("[data-video-cover]").forEach((cover) => {
+      if (cover.dataset.bound === "1") return;
+      cover.dataset.bound = "1";
+
+      const uid = cover.getAttribute("data-video-cover");
+      if (!uid) return;
+
+      const video = document.querySelector<HTMLVideoElement>(
+        `[data-video-el="${uid}"]`,
+      );
+      if (!video) return;
+
+      const start = () => {
+        cover.classList.add("pointer-events-none", "opacity-0");
+        video.setAttribute("controls", "");
+        void video.play().catch(() => {});
+        window.setTimeout(() => cover.remove(), 320);
+      };
+
+      cover.addEventListener("click", start);
+    });
+  }
+
+  initBrandedVideoCovers();
+  document.addEventListener("astro:page-load", initBrandedVideoCovers);
+</script>

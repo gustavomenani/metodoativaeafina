@@ -47,15 +47,26 @@ const videoTestimonials: {
   src?: string;
   embedUrl?: string;
   poster?: string;
+  coverTitle?: string;
+  coverSubtitle?: string;
 }[] = [
   {
     title: "Depoimento em vídeo 1 — aluna do Método Ativa & Afina",
+    poster: "/videos/depoimento-poster.webp",
+    coverTitle: "Assista o depoimento",
+    coverSubtitle: "História real de aluna",
   },
   {
     title: "Depoimento em vídeo 2 — aluna do Método Ativa & Afina",
+    poster: "/videos/depoimento-poster.webp",
+    coverTitle: "Assista o depoimento",
+    coverSubtitle: "História real de aluna",
   },
   {
     title: "Depoimento em vídeo 3 — aluna do Método Ativa & Afina",
+    poster: "/videos/depoimento-poster.webp",
+    coverTitle: "Assista o depoimento",
+    coverSubtitle: "História real de aluna",
   },
 ];
 ---
@@ -163,6 +174,8 @@ const videoTestimonials: {
                 src={v.src}
                 embedUrl={v.embedUrl}
                 poster={v.poster}
+                coverTitle={v.coverTitle}
+                coverSubtitle={v.coverSubtitle}
                 aspect="reels"
               />
             </div>
