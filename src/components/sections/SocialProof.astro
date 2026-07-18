@@ -47,32 +47,32 @@ const videoTestimonials: {
   src?: string;
   embedUrl?: string;
   poster?: string;
-  coverTitle?: string;
-  coverTitleHighlight?: string;
+  coverName?: string;
+  coverQuote?: string;
   coverCta?: string;
 }[] = [
   {
     title: "Depoimento em vídeo — Amanda, 35 anos",
     src: "/videos/depoimento-amanda.mp4",
     poster: "/videos/depoimento-amanda-poster.webp",
-    coverTitle: "Veja o que nossas",
-    coverTitleHighlight: "alunas têm a dizer",
+    coverName: "Amanda, 35 anos",
+    coverQuote: "Eu sempre fui magrinha, mas aquela pochete não sumia de jeito nenhum.",
     coverCta: "Assistir agora",
   },
   {
     title: "Depoimento em vídeo — Luana, 30 anos",
     src: "/videos/depoimento-luana.mp4",
     poster: "/videos/depoimento-luana-poster.webp",
-    coverTitle: "Veja o que nossas",
-    coverTitleHighlight: "alunas têm a dizer",
+    coverName: "Luana, 30 anos",
+    coverQuote: "Minha barriga estufava tanto que eu evitava certas roupas.",
     coverCta: "Assistir agora",
   },
   {
     title: "Depoimento em vídeo — Priscila, 38 anos",
     src: "/videos/depoimento-priscila.mp4",
     poster: "/videos/depoimento-priscila-poster.webp",
-    coverTitle: "Veja o que nossas",
-    coverTitleHighlight: "alunas têm a dizer",
+    coverName: "Priscila, 38 anos",
+    coverQuote: "Achei que nunca mais perderia a barriga da gravidez.",
     coverCta: "Assistir agora",
   },
 ];
@@ -181,8 +181,8 @@ const videoTestimonials: {
                 src={v.src}
                 embedUrl={v.embedUrl}
                 poster={v.poster}
-                coverTitle={v.coverTitle}
-                coverTitleHighlight={v.coverTitleHighlight}
+                coverName={v.coverName}
+                coverQuote={v.coverQuote}
                 coverCta={v.coverCta}
                 aspect="reels"
               />

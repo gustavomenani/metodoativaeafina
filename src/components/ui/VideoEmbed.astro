@@ -22,6 +22,10 @@ interface Props {
   coverTitleHighlight?: string;
   /** Texto do botão CTA da capa */
   coverCta?: string;
+  /** Nome + idade da aluna na capa de depoimento — ex.: "Amanda, 35 anos" */
+  coverName?: string;
+  /** Frase curta da aluna na capa de depoimento */
+  coverQuote?: string;
   /** Se false, não usa overlay de capa (só poster nativo) */
   brandedCover?: boolean;
 }
@@ -38,8 +42,14 @@ const {
   coverTitle = "Como funciona o",
   coverTitleHighlight = "Método Ativa & Afina",
   coverCta = "Assistir agora",
+  coverName,
+  coverQuote,
   brandedCover = true,
 } = Astro.props;
+
+/** Capa de depoimento (nome + frase da aluna), renderizada em HTML para
+ *  garantir cores e tamanhos idênticos entre todos os depoimentos. */
+const isTestimonial = Boolean(coverName && coverQuote);
 
 const aspectClass = {
   video: "aspect-video",
@@ -95,7 +105,13 @@ const usePosterImage = Boolean(poster);
             data-video-cover={uid}
             aria-label={`${coverTitle} ${coverTitleHighlight}. ${title}`}
           >
-            {usePosterImage ? (
+            {isTestimonial ? (
+              /* Capa de depoimento em HTML — mesmas cores e tamanhos p/ todas */
+              <span
+                class="absolute inset-0 bg-[linear-gradient(155deg,#1e3231_0%,#122b29_48%,#0a2120_100%)]"
+                aria-hidden="true"
+              />
+            ) : usePosterImage ? (
               /* Capa gerada (estilo da referência da cliente) */
               <img
                 src={poster}
@@ -110,8 +126,65 @@ const usePosterImage = Boolean(poster);
               <span class="absolute inset-0 bg-gradient-to-b from-[#5a6e46] via-[#143333] to-[#0a1a1a]" />
             )}
 
+            {isTestimonial && (
+              <span class="relative z-[1] flex h-full w-full flex-col items-center px-5 pt-[13%] pb-[9%] text-center">
+                <span class="text-[0.7rem] font-semibold uppercase tracking-[0.22em] text-olive-light">
+                  Depoimento
+                </span>
+                <span
+                  class="mt-2.5 h-[3px] w-9 rounded-full bg-sun"
+                  aria-hidden="true"
+                />
+
+                <span class="mt-6 font-display text-xl font-bold leading-tight text-white sm:text-2xl">
+                  {coverName}
+                </span>
+
+                <span class="mt-3 max-w-[15rem] text-sm leading-snug text-olive-light/95 sm:text-[0.95rem]">
+                  “{coverQuote}”
+                </span>
+
+                <span class="flex flex-1 items-center justify-center py-4">
+                  <span
+                    class="flex h-[5.5rem] w-[5.5rem] items-center justify-center rounded-full bg-white shadow-lg ring-[8px] ring-sun transition-transform duration-200 group-hover:scale-105 group-active:scale-95 sm:h-[6.25rem] sm:w-[6.25rem]"
+                    aria-hidden="true"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="38"
+                      height="38"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      class="ml-1 text-[#0f2828]"
+                    >
+                      <path d="M8 5.14v13.72L19 12 8 5.14z" />
+                    </svg>
+                  </span>
+                </span>
+
+                <span class="inline-flex w-full max-w-[15rem] items-center justify-center gap-2 whitespace-nowrap rounded-2xl bg-sun px-4 py-3.5 text-sm font-bold uppercase tracking-wide text-ink shadow-md sm:text-base">
+                  {coverCta}
+                  <span
+                    class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 border-ink"
+                    aria-hidden="true"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="10"
+                      height="10"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      class="ml-[1px]"
+                    >
+                      <path d="M8 5.14v13.72L19 12 8 5.14z" />
+                    </svg>
+                  </span>
+                </span>
+              </span>
+            )}
+
             {
-              !usePosterImage && (
+              !isTestimonial && !usePosterImage && (
                 <span class="relative z-[1] flex h-full w-full flex-col items-center px-4 pt-[12%] pb-[10%]">
                   <span class="text-[0.7rem] font-semibold uppercase tracking-[0.22em] text-[#c4cd96]">
                     {coverEyebrow}
