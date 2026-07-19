@@ -1,0 +1,244 @@
+{
+  "meta": {
+    "title": "Método Ativa & Afina — Afine sua cintura em 8 semanas",
+    "description": "Ative o transverso do abdômen e conquiste uma barriga mais reta em apenas 8 semanas, sem dietas restritivas e sem centenas de abdominais. Método criado por Lilian Ferancini e Emanuela (Manu)."
+  },
+  "site": {
+    "name": "Método Ativa & Afina",
+    "checkoutUrl": "https://pay.hotmart.com/U105020016E",
+    "year": 2026,
+    "priceFrom": "R$ 197,00",
+    "priceTo": "R$ 129,90",
+    "installments": "Em até 12x de R$ 13,43",
+    "guaranteeDays": 7,
+    "accessYears": 1,
+    "whatsappE164": "5532984264132",
+    "whatsappDisplay": "(32) 98426-4132",
+    "whatsappMessage": "Olá! Acabei de ver a página do Método Ativa & Afina e quero tirar uma dúvida.",
+    "metaPixelId": "793131076956074"
+  },
+  "creators": {
+    "lilian": {
+      "name": "Lilian Ferancini",
+      "role": "Fisioterapeuta, Professora de Educação Física, Especialista em Reabilitação Abdominal.",
+      "instagram": "https://www.instagram.com/lilianferancini",
+      "instagramHandle": "@lilianferancini"
+    },
+    "manu": {
+      "name": "Emanuela Vieira",
+      "shortName": "Emanuela (Manu)",
+      "role": "Personal Trainer, Especialista em Treino Feminino.",
+      "instagram": "https://www.instagram.com/emanu.fit",
+      "instagramHandle": "@emanu.fit"
+    }
+  },
+  "hero": {
+    "eyebrow": "Método Ativa & Afina",
+    "title": "Ative sua cinta natural e conquiste uma barriga mais reta e uma cintura mais fina em apenas 8 semanas.",
+    "imageAlt": "Antes e depois — resultado real: de manequim 42 para 38 com o Método Ativa & Afina.",
+    "p1": "Você treina, faz dieta e, mesmo assim, sua barriga continua estufada, flácida ou com aquela pochete que insiste em não sumir?",
+    "p2": "Nem toda barriga é só gordura.",
+    "p3Before": "O problema pode estar na falta de ativação da sua",
+    "p3Highlight": "Cinta Modeladora Natural",
+    "p3After": ".",
+    "p4": "No Método Ativa & Afina, você aprende a ativar e fortalecer essa musculatura com técnicas de respiração e exercícios progressivos.",
+    "cta": "QUERO TRANSFORMAR MINHA BARRIGA AGORA"
+  },
+  "videoSales": {
+    "eyebrow": "Assista",
+    "title": "Descubra por que tantas mulheres treinam, fazem dieta e continuam com a barriga estufada.",
+    "videoTitle": "Lilian e Manu apresentam o Método Ativa & Afina",
+    "src": "/videos/video-vendas.mp4",
+    "poster": "/videos/video-vendas-poster.webp",
+    "coverEyebrow": "Descubra",
+    "coverTitle": "Como funciona o",
+    "coverTitleHighlight": "Método Ativa & Afina",
+    "coverCta": "Assistir agora",
+    "highlight": "A culpa não é sua! O erro da maioria das mulheres é achar que toda barriga se resolve apenas com queima de gordura ou com centenas de abdominais.",
+    "closing": "Primeiro, nós reconectamos os seus músculos profundos. Nessa fase você já começa a perder medidas! Imagina o resultado quando você somar isso aos nossos treinos metabólicos inteligentes?"
+  },
+  "howItWorks": {
+    "eyebrow": "Como funciona",
+    "title": "O Caminho Certo para Mudar a Aparência da sua Barriga",
+    "steps": [
+      {
+        "num": "01",
+        "title": "Exercícios Respiratórios Iniciais",
+        "text": "Você vai aprender uma respiração simples que ajuda a controlar a pressão interna, impedindo que a sua barriga seja empurrada para frente no dia a dia.",
+        "alt": "Demonstração do exercício respiratório inicial do Método Ativa & Afina.",
+        "imageKey": "passo1"
+      },
+      {
+        "num": "02",
+        "title": "Ativação Profunda",
+        "text": "O passo onde você aprende a ativar a musculatura mais profunda do abdômen, que funciona como a sua verdadeira cinta natural, puxando a barriga e a pochete de volta para o lugar.",
+        "alt": "Demonstração da ativação profunda do abdômen bem colado e firme.",
+        "imageKey": "passo2"
+      },
+      {
+        "num": "03",
+        "title": "Treinos Metabólicos Inteligentes",
+        "text": "Treinos rápidos e práticos para acelerar a queima de gordura, complementar a ativação da musculatura profunda e deixar o corpo mais firme.",
+        "alt": "Demonstração dos treinos metabólicos inteligentes do Método Ativa & Afina.",
+        "imageKey": "passo3"
+      }
+    ],
+    "cta": "QUERO COMEÇAR MEU PASSO A PASSO HOJE"
+  },
+  "forWhom": {
+    "eyebrow": "É para você?",
+    "title": "O Método Ativa & Afina foi feito para você que:",
+    "items": [
+      "Se incomoda com a barriga constantemente estufada.",
+      "Tem aquela pochete abaixo do umbigo que não sai por nada.",
+      "É mãe e sente que a sua barriga nunca mais voltou ao normal após a gravidez.",
+      "Treina, se alimenta bem e mesmo assim continua com a barriga para frente.",
+      "É magra, mas sofre com aquela barriguinha saliente que insiste em aparecer na roupa.",
+      "Deixou de usar roupas justas ou biquíni por vergonha do formato da barriga.",
+      "Se incomoda com a flacidez muscular na barriga e quer devolver a firmeza e o tônus para o abdômen.",
+      "Quer reduzir as medidas da circunferência abdominal e afinar a linha da cintura.",
+      "Deseja melhorar a postura."
+    ]
+  },
+  "socialProof": {
+    "eyebrow": "Resultados reais",
+    "title": "Veja o que acontece quando você ativa sua Cinta Modeladora Natural",
+    "results": [
+      {
+        "imageKey": "maristela",
+        "alt": "Antes e depois de Maristela com o Método Ativa & Afina.",
+        "quote": "Depois dos 40, achei que minha pochete não tinha mais solução. Treinava, fazia dieta e nada da pochete desaparecer. Com o Método Ativa e Afina consegui reduzir a projeção da barriga e melhorar minha postura.",
+        "name": "Maristela",
+        "age": "45 anos"
+      },
+      {
+        "imageKey": "resultadoA",
+        "alt": "Antes e depois de Lilian com o Método Ativa & Afina.",
+        "quote": "Como mãe, o que mais me impressionou foi perceber minha barriga mais firme e a cintura mais fina. O abdômen voltou para o lugar sem precisar perder peso e o estufamento acabou.",
+        "name": "Lilian",
+        "age": "41 anos"
+      },
+      {
+        "imageKey": "resultadoB",
+        "alt": "Antes e depois de Natália com o Método Ativa & Afina.",
+        "quote": "Em apenas 4 semanas, já perdi medidas na barriga. Mesmo acima do peso, minhas roupas voltaram a servir sem apertar.",
+        "name": "Natália",
+        "age": "40 anos"
+      }
+    ],
+    "videosTitle": "Veja o que nossas alunas têm a dizer",
+    "videosSubtitle": "Histórias reais de mulheres que transformaram a aparência da barriga com o Método Ativa & Afina.",
+    "videoTestimonials": [
+      {
+        "title": "Depoimento em vídeo — Amanda, 35 anos",
+        "src": "/videos/depoimento-amanda.mp4",
+        "poster": "/videos/depoimento-amanda-poster.webp",
+        "coverName": "Amanda, 35 anos",
+        "coverQuote": "Eu sempre fui magrinha, mas aquela pochete não sumia de jeito nenhum.",
+        "coverCta": "Assistir agora"
+      },
+      {
+        "title": "Depoimento em vídeo — Luana, 30 anos",
+        "src": "/videos/depoimento-luana.mp4",
+        "poster": "/videos/depoimento-luana-poster.webp",
+        "coverName": "Luana, 30 anos",
+        "coverQuote": "Minha barriga estufava tanto que eu evitava certas roupas.",
+        "coverCta": "Assistir agora"
+      },
+      {
+        "title": "Depoimento em vídeo — Priscila, 42 anos",
+        "src": "/videos/depoimento-priscila.mp4",
+        "poster": "/videos/depoimento-priscila-poster.webp",
+        "coverName": "Priscila, 42 anos",
+        "coverQuote": "Achei que nunca mais perderia a barriga da gravidez.",
+        "coverCta": "Assistir agora"
+      }
+    ],
+    "cta": "QUERO TER ESSES RESULTADOS NA MINHA BARRIGA"
+  },
+  "whatYouGet": {
+    "eyebrow": "Seu acesso",
+    "title": "O que você vai receber",
+    "items": [
+      {
+        "icon": "program",
+        "title": "Programa Completo de 8 Semanas",
+        "text": "Vídeos curtos, simples e didáticos (5 a 20 minutos) para fazer em casa apenas com um tapete e garrafa d'água."
+      },
+      {
+        "icon": "access",
+        "title": "1 Ano de Acesso Livre",
+        "text": "Veja e reveja no seu próprio tempo sempre que quiser."
+      },
+      {
+        "icon": "bonus1",
+        "title": "BÔNUS 1: O Guia de Medidas e Planner de Evolução (PDF)",
+        "text": "Para você rastrear perfeitamente cada centímetro que for perdendo."
+      },
+      {
+        "icon": "bonus2",
+        "title": "BÔNUS 2: Automassagem Modeladora Abdominal",
+        "text": "Técnica manual rápida para reduzir a retenção de líquidos, melhorar o funcionamento do intestino e ajudar a diminuir ainda mais as medidas da circunferência abdominal."
+      },
+      {
+        "icon": "bonus3",
+        "title": "BÔNUS 3: Guia Pós-Curso",
+        "text": "Aprenda como manter sua barriga mais firme e cintura mais definida após as 8 semanas, com orientações práticas para a sua rotina."
+      }
+    ]
+  },
+  "offer": {
+    "eyebrow": "Oferta de lançamento",
+    "title": "Garanta seu acesso ao Método Ativa & Afina",
+    "priceLabel": "Preço Especial",
+    "cta": "QUERO MEU ACESSO IMEDIATO AO ATIVA & AFINA",
+    "guaranteeTitle": "Garantia Incondicional de 7 dias.",
+    "guaranteeText": "Se por qualquer motivo sentir que o método não é para você, basta solicitar o reembolso."
+  },
+  "creatorsSection": {
+    "eyebrow": "As criadoras",
+    "title": "Lilian e Manu",
+    "imageAlt": "Lilian Ferancini e Emanuela Vieira juntas na academia — criadoras do Método Ativa & Afina."
+  },
+  "faq": {
+    "eyebrow": "Dúvidas",
+    "title": "Perguntas Frequentes",
+    "items": [
+      {
+        "q": "Quando começo a ver resultados?",
+        "a": "Com consistência, muitas alunas percebem melhora na postura e firmeza abdominal a partir da 4ª semana. A partir da 6ª semana, a redução de medidas se torna mais visível."
+      },
+      {
+        "q": "Eu nunca treinei ou sou iniciante, eu consigo fazer o curso?",
+        "a": "Com certeza! O método foi desenhado de forma simples e muito didática. As aulas são passo a passo para que qualquer mulher, mesmo começando do zero absoluto, consiga aprender e aplicar os exercícios corretamente."
+      },
+      {
+        "q": "Eu já treino pesado e faço dieta, esse método realmente vai me ajudar?",
+        "a": "Sim! O erro da maioria das mulheres é achar que toda barriga se resolve apenas com queima de gordura ou com abdominais tradicionais. Se você treina e se alimenta bem, mas a sua barriga continua caída ou estufada para frente, o problema real está na fraqueza e na falta de ativação dos seus músculos profundos. O método vai direto na raiz do problema."
+      },
+      {
+        "q": "Eu tenho diástase, posso fazer o método?",
+        "a": "Pode e deve! O Método Ativa & Afina ajuda muito você a conseguir gerir melhor a pressão interna da sua barriga e, com isso, melhorar a sua diástase de forma segura, devolvendo a firmeza que o seu abdômen perdeu."
+      },
+      {
+        "q": "Sou mãe recente, posso fazer o método?",
+        "a": "Se você já passou pelo período de pós-parto inicial e foi devidamente liberada pelo seu médico nas consultas de rotina, você pode sim fazer o método. Ele é excelente para ajudar a recuperar a firmeza abdominal após a gravidez."
+      },
+      {
+        "q": "Preciso de algum equipamento?",
+        "a": "Não. Você só precisa do seu corpo e de um pequeno espaço na sua casa. O método foi desenhado para ser prático e acessível."
+      },
+      {
+        "q": "Quanto tempo terei de acesso ao curso?",
+        "a": "Você terá 1 ano de acesso para assistir no seu ritmo e repetir as aulas quantas vezes quiser."
+      },
+      {
+        "q": "E se eu não gostar do curso?",
+        "a": "Você tem 7 dias de garantia incondicional, se por qualquer motivo sentir que o método não é para você."
+      }
+    ]
+  },
+  "admin": {
+    "password": "ativa2026"
+  }
+}

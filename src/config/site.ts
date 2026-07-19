@@ -1,48 +1,32 @@
 /**
  * Configuração central da landing page.
- * CTAs de compra → Hotmart. WhatsApp fica só para contato.
+ * Textos e mídia editáveis vêm de src/data/content.json (painel /admin).
  */
-const WHATSAPP_E164 = "5532984264132";
-const WHATSAPP_MSG = encodeURIComponent(
-  "Olá! Acabei de ver a página do Método Ativa & Afina e quero tirar uma dúvida.",
-);
+import content from "../data/content.json";
 
+const WHATSAPP_E164 = content.site.whatsappE164;
+const WHATSAPP_MSG = encodeURIComponent(content.site.whatsappMessage);
 const WHATSAPP_HREF_WITH_MSG = `https://wa.me/${WHATSAPP_E164}?text=${WHATSAPP_MSG}`;
 
-/** Checkout oficial Hotmart */
-const HOTMART_CHECKOUT = "https://pay.hotmart.com/U105020016E";
-
 export const siteConfig = {
-  name: "Método Ativa & Afina",
-  /** Link de compra / adquirir → Hotmart */
-  checkoutUrl: HOTMART_CHECKOUT,
-  year: 2026,
+  name: content.site.name,
+  checkoutUrl: content.site.checkoutUrl,
+  year: content.site.year,
   price: {
-    from: "R$ 197,00",
-    to: "R$ 129,90",
+    from: content.site.priceFrom,
+    to: content.site.priceTo,
   },
-  guaranteeDays: 7,
-  accessYears: 1,
+  installments: content.site.installments,
+  guaranteeDays: content.site.guaranteeDays,
+  accessYears: content.site.accessYears,
   contact: {
     whatsapp: {
-      display: "(32) 98426-4132",
+      display: content.site.whatsappDisplay,
       href: `https://wa.me/${WHATSAPP_E164}`,
       hrefWithMessage: WHATSAPP_HREF_WITH_MSG,
     },
-    creators: {
-      lilian: {
-        name: "Lilian Ferancini",
-        role: "Fisioterapeuta, Professora de Educação Física, Especialista em Reabilitação Abdominal.",
-        instagram: "https://www.instagram.com/lilianferancini",
-        instagramHandle: "@lilianferancini",
-      },
-      manu: {
-        name: "Emanuela Vieira",
-        shortName: "Emanuela (Manu)",
-        role: "Personal Trainer, Especialista em Treino Feminino.",
-        instagram: "https://www.instagram.com/emanu.fit",
-        instagramHandle: "@emanu.fit",
-      },
-    },
+    creators: content.creators,
   },
 } as const;
+
+export { content };

@@ -1,6 +1,9 @@
 ---
 import VideoEmbed from "../ui/VideoEmbed.astro";
 import SectionTitle from "../ui/SectionTitle.astro";
+import { content } from "../../config/site";
+
+const v = content.videoSales;
 ---
 
 <section
@@ -11,8 +14,8 @@ import SectionTitle from "../ui/SectionTitle.astro";
   <div class="mx-auto max-w-4xl px-4 sm:px-6">
     <SectionTitle
       id="video-title"
-      eyebrow="Assista"
-      title="Descubra por que tantas mulheres treinam, fazem dieta e continuam com a barriga estufada."
+      eyebrow={v.eyebrow}
+      title={v.title}
       class="mb-8 sm:mb-10"
     />
 
@@ -22,14 +25,14 @@ import SectionTitle from "../ui/SectionTitle.astro";
           class="rounded-[2rem] bg-gradient-to-b from-slate-200/80 to-slate-100 p-1.5 shadow-2xl shadow-ink/15 ring-1 ring-slate-200/80 sm:p-2"
         >
           <VideoEmbed
-            title="Lilian e Manu apresentam o Método Ativa & Afina"
+            title={v.videoTitle}
             aspect="reels"
-            src="/videos/video-vendas.mp4"
-            poster="/videos/video-vendas-poster.webp"
-            coverEyebrow="Descubra"
-            coverTitle="Como funciona o"
-            coverTitleHighlight="Método Ativa & Afina"
-            coverCta="Assistir agora"
+            src={v.src}
+            poster={v.poster}
+            coverEyebrow={v.coverEyebrow}
+            coverTitle={v.coverTitle}
+            coverTitleHighlight={v.coverTitleHighlight}
+            coverCta={v.coverCta}
           />
         </div>
       </div>
@@ -39,18 +42,14 @@ import SectionTitle from "../ui/SectionTitle.astro";
       class="reveal reveal-delay-2 mt-8 rounded-2xl border-l-4 border-sun bg-white p-5 shadow-sm sm:p-7"
     >
       <p class="text-base font-semibold leading-relaxed text-ink sm:text-lg">
-        A culpa não é sua! O erro da maioria das mulheres é achar que toda
-        barriga se resolve apenas com queima de gordura ou com centenas de
-        abdominais.
+        {v.highlight}
       </p>
     </div>
 
     <p
       class="reveal reveal-delay-3 mt-6 text-center text-base leading-relaxed text-ink-muted sm:text-lg"
     >
-      Primeiro, nós reconectamos os seus músculos profundos. Nessa fase você já
-      começa a perder medidas! Imagina o resultado quando você somar isso aos
-      nossos treinos metabólicos inteligentes?
+      {v.closing}
     </p>
   </div>
 </section>

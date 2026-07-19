@@ -1,17 +1,9 @@
 ---
 import SectionTitle from "../ui/SectionTitle.astro";
+import { content } from "../../config/site";
 
-const items = [
-  "Se incomoda com a barriga constantemente estufada.",
-  "Tem aquela pochete abaixo do umbigo que não sai por nada.",
-  "É mãe e sente que a sua barriga nunca mais voltou ao normal após a gravidez.",
-  "Treina, se alimenta bem e mesmo assim continua com a barriga para frente.",
-  "É magra, mas sofre com aquela barriguinha saliente que insiste em aparecer na roupa.",
-  "Deixou de usar roupas justas ou biquíni por vergonha do formato da barriga.",
-  "Se incomoda com a flacidez muscular na barriga e quer devolver a firmeza e o tônus para o abdômen.",
-  "Quer reduzir as medidas da circunferência abdominal e afinar a linha da cintura.",
-  "Deseja melhorar a postura.",
-];
+const fw = content.forWhom;
+const items = fw.items;
 ---
 
 <section
@@ -22,8 +14,8 @@ const items = [
   <div class="mx-auto max-w-3xl px-4 sm:px-6">
     <SectionTitle
       id="para-quem-title"
-      eyebrow="É para você?"
-      title="O Método Ativa & Afina foi feito para você que:"
+      eyebrow={fw.eyebrow}
+      title={fw.title}
       class="mb-8 sm:mb-10"
     />
 
@@ -33,7 +25,6 @@ const items = [
           <li
             class:list={[
               "reveal flex gap-3 rounded-xl bg-white p-4 shadow-sm ring-1 ring-slate-100 sm:p-5",
-              // Alterna deslize esq/dir + atraso em cascata ao rolar
               i % 2 === 0 ? "reveal-slide" : "reveal-slide-right",
             ]}
             style={`--stagger: ${i}`}
@@ -53,7 +44,7 @@ const items = [
                 stroke-linecap="round"
                 stroke-linejoin="round"
               >
-                <path d="M20 6 9 17l-5-5" />
+                <path d="M20 6 9 17l-5-5"></path>
               </svg>
             </span>
             <span class="text-sm leading-relaxed text-ink sm:text-base">

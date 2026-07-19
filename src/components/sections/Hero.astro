@@ -2,6 +2,9 @@
 import { Image } from "astro:assets";
 import CtaButton from "../ui/CtaButton.astro";
 import heroImage from "../../assets/images/hero/antes-depois.webp";
+import { content } from "../../config/site";
+
+const h = content.hero;
 ---
 
 <section
@@ -24,15 +27,14 @@ import heroImage from "../../assets/images/hero/antes-depois.webp";
     <p
       class="reveal mb-4 text-center text-xs font-semibold uppercase tracking-[0.18em] text-teal"
     >
-      Método Ativa &amp; Afina
+      {h.eyebrow}
     </p>
 
     <h1
       id="hero-title"
       class="reveal reveal-delay-1 text-center font-display text-[1.7rem] font-bold leading-[1.18] tracking-tight text-ink sm:text-3xl md:text-4xl"
     >
-      Ative sua cinta natural e conquiste uma barriga mais reta e uma cintura
-      mais fina em apenas 8 semanas.
+      {h.title}
     </h1>
 
     <!-- Foto de impacto (LCP) — sem legenda repetida (texto já está na imagem) -->
@@ -42,7 +44,7 @@ import heroImage from "../../assets/images/hero/antes-depois.webp";
       >
         <Image
           src={heroImage}
-          alt="Antes e depois — resultado real: de manequim 42 para 38 com o Método Ativa & Afina."
+          alt={h.imageAlt}
           widths={[360, 480, 640, 800, 1000]}
           sizes="(max-width: 640px) 90vw, 512px"
           formats={["avif", "webp"]}
@@ -58,32 +60,30 @@ import heroImage from "../../assets/images/hero/antes-depois.webp";
     <p
       class="reveal reveal-delay-3 mx-auto mt-7 max-w-xl text-center text-base leading-relaxed text-ink-muted sm:mt-8 sm:text-lg"
     >
-      Você treina, faz dieta e, mesmo assim, sua barriga continua estufada,
-      flácida ou com aquela pochete que insiste em não sumir?
+      {h.p1}
     </p>
 
     <p
       class="reveal reveal-delay-3 mx-auto mt-4 max-w-xl text-center text-base leading-relaxed text-ink sm:text-lg"
     >
-      Nem toda barriga é só gordura.
+      {h.p2}
     </p>
 
     <p
       class="reveal reveal-delay-3 mx-auto mt-4 max-w-xl text-center text-base leading-relaxed text-ink-muted sm:text-lg"
     >
-      O problema pode estar na falta de ativação da sua
-      <strong class="font-semibold text-ink">Cinta Modeladora Natural</strong>.
+      {h.p3Before}
+      <strong class="font-semibold text-ink">{h.p3Highlight}</strong>{h.p3After}
     </p>
 
     <p
       class="reveal reveal-delay-3 mx-auto mt-4 max-w-xl text-center text-base font-medium leading-relaxed text-ink sm:text-lg"
     >
-      No Método Ativa &amp; Afina, você aprende a ativar e fortalecer essa
-      musculatura com técnicas de respiração e exercícios progressivos.
+      {h.p4}
     </p>
 
     <div class="reveal reveal-delay-4 mt-8 flex justify-center sm:mt-10">
-      <CtaButton label="QUERO TRANSFORMAR MINHA BARRIGA AGORA" />
+      <CtaButton label={h.cta} />
     </div>
   </div>
 </section>

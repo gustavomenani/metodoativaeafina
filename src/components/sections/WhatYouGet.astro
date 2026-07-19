@@ -1,33 +1,9 @@
 ---
 import SectionTitle from "../ui/SectionTitle.astro";
+import { content } from "../../config/site";
 
-const items = [
-  {
-    icon: "program",
-    title: "Programa Completo de 8 Semanas",
-    text: "Vídeos curtos, simples e didáticos (5 a 20 minutos) para fazer em casa apenas com um tapete e garrafa d'água.",
-  },
-  {
-    icon: "access",
-    title: "1 Ano de Acesso Livre",
-    text: "Veja e reveja no seu próprio tempo sempre que quiser.",
-  },
-  {
-    icon: "bonus1",
-    title: "BÔNUS 1: O Guia de Medidas e Planner de Evolução (PDF)",
-    text: "Para você rastrear perfeitamente cada centímetro que for perdendo.",
-  },
-  {
-    icon: "bonus2",
-    title: "BÔNUS 2: Automassagem Modeladora Abdominal",
-    text: "Técnica manual rápida para reduzir a retenção de líquidos, melhorar o funcionamento do intestino e ajudar a diminuir ainda mais as medidas da circunferência abdominal.",
-  },
-  {
-    icon: "bonus3",
-    title: "BÔNUS 3: Guia Pós-Curso",
-    text: "Aprenda como manter sua barriga mais firme e cintura mais definida após as 8 semanas, com orientações práticas para a sua rotina.",
-  },
-];
+const wyg = content.whatYouGet;
+const items = wyg.items;
 ---
 
 <section
@@ -38,8 +14,8 @@ const items = [
   <div class="mx-auto max-w-4xl px-4 sm:px-6">
     <SectionTitle
       id="voce-recebe-title"
-      eyebrow="Seu acesso"
-      title="O que você vai receber"
+      eyebrow={wyg.eyebrow}
+      title={wyg.title}
       class="mb-10 sm:mb-12"
     />
 

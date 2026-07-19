@@ -6,36 +6,20 @@ import SectionTitle from "../ui/SectionTitle.astro";
 import passo1 from "../../assets/images/passos/passo-1-respiracao.webp";
 import passo2 from "../../assets/images/passos/passo-2-ativacao.webp";
 import passo3 from "../../assets/images/passos/passo-3-funcional.webp";
+import { content } from "../../config/site";
 
-const steps: {
-  num: string;
-  title: string;
-  text: string;
-  alt: string;
-  image: ImageMetadata;
-}[] = [
-  {
-    num: "01",
-    title: "Exercícios Respiratórios Iniciais",
-    text: "Você vai aprender uma respiração simples que ajuda a controlar a pressão interna, impedindo que a sua barriga seja empurrada para frente no dia a dia.",
-    alt: "Demonstração do exercício respiratório inicial do Método Ativa & Afina.",
-    image: passo1,
-  },
-  {
-    num: "02",
-    title: "Ativação Profunda",
-    text: "O passo onde você aprende a ativar a musculatura mais profunda do abdômen, que funciona como a sua verdadeira cinta natural, puxando a barriga e a pochete de volta para o lugar.",
-    alt: "Demonstração da ativação profunda do abdômen bem colado e firme.",
-    image: passo2,
-  },
-  {
-    num: "03",
-    title: "Treinos Metabólicos Inteligentes",
-    text: "Treinos rápidos e práticos para acelerar a queima de gordura, complementar a ativação da musculatura profunda e deixar o corpo mais firme.",
-    alt: "Demonstração dos treinos metabólicos inteligentes do Método Ativa & Afina.",
-    image: passo3,
-  },
-];
+const imageMap: Record<string, ImageMetadata> = {
+  passo1,
+  passo2,
+  passo3,
+};
+
+const hw = content.howItWorks;
+
+const steps = hw.steps.map((step) => ({
+  ...step,
+  image: imageMap[step.imageKey] ?? passo1,
+}));
 ---
 
 <section
@@ -46,8 +30,8 @@ const steps: {
   <div class="mx-auto max-w-6xl px-4 sm:px-6">
     <SectionTitle
       id="como-funciona-title"
-      eyebrow="Como funciona"
-      title="O Caminho Certo para Mudar a Aparência da sua Barriga"
+      eyebrow={hw.eyebrow}
+      title={hw.title}
       class="mb-10 sm:mb-12"
     />
 
@@ -104,7 +88,7 @@ const steps: {
     </p>
 
     <div class="reveal mt-10 flex justify-center">
-      <CtaButton label="QUERO COMEÇAR MEU PASSO A PASSO HOJE" />
+      <CtaButton label={hw.cta} />
     </div>
   </div>
 </section>

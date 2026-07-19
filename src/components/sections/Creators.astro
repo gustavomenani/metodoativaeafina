@@ -2,9 +2,10 @@
 import { Image } from "astro:assets";
 import SectionTitle from "../ui/SectionTitle.astro";
 import criadoras from "../../assets/images/criadoras/lilian-manu.webp";
-import { siteConfig } from "../../config/site";
+import { siteConfig, content } from "../../config/site";
 
 const { lilian, manu } = siteConfig.contact.creators;
+const cs = content.creatorsSection;
 ---
 
 <section
@@ -15,8 +16,8 @@ const { lilian, manu } = siteConfig.contact.creators;
   <div class="mx-auto max-w-5xl px-4 sm:px-6">
     <SectionTitle
       id="criadoras-title"
-      eyebrow="As criadoras"
-      title="Lilian e Manu"
+      eyebrow={cs.eyebrow}
+      title={cs.title}
       class="mb-10 sm:mb-12"
     />
 
@@ -26,7 +27,7 @@ const { lilian, manu } = siteConfig.contact.creators;
       >
         <Image
           src={criadoras}
-          alt="Lilian Ferancini e Emanuela Vieira juntas na academia — criadoras do Método Ativa & Afina."
+          alt={cs.imageAlt}
           widths={[400, 640, 800, 1000, 1200]}
           sizes="(max-width: 1024px) 90vw, 480px"
           formats={["avif", "webp"]}

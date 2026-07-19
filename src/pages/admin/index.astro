@@ -1,0 +1,529 @@
+---
+import { content } from "../../config/site";
+import "../../styles/global.css";
+
+const initial = JSON.stringify(content);
+---
+
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Painel Admin · Método Ativa &amp; Afina</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="min-h-screen bg-surface font-sans text-ink antialiased">
+    <!-- Login -->
+    <div
+      id="login-screen"
+      class="flex min-h-screen items-center justify-center px-4"
+    >
+      <div
+        class="w-full max-w-sm rounded-3xl bg-white p-8 shadow-xl ring-1 ring-slate-100"
+      >
+        <p class="text-center text-xs font-semibold uppercase tracking-[0.2em] text-teal">
+          Método Ativa &amp; Afina
+        </p>
+        <h1 class="mt-2 text-center font-display text-2xl font-bold text-ink">
+          Painel Admin
+        </h1>
+        <p class="mt-2 text-center text-sm text-ink-muted">
+          Entre para editar textos e mídia da página.
+        </p>
+        <form id="login-form" class="mt-6 space-y-4">
+          <label class="block">
+            <span class="mb-1.5 block text-sm font-medium text-ink">Senha</span>
+            <input
+              id="login-password"
+              type="password"
+              autocomplete="current-password"
+              class="w-full rounded-xl border border-slate-200 bg-surface px-4 py-3 text-sm outline-none ring-teal/30 focus:ring-2"
+              placeholder="Digite a senha"
+              required
+            />
+          </label>
+          <p id="login-error" class="hidden text-sm text-red-600"></p>
+          <button
+            type="submit"
+            class="w-full rounded-xl bg-teal px-4 py-3 text-sm font-bold uppercase tracking-wide text-white transition hover:bg-teal-deep"
+          >
+            Entrar
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Editor -->
+    <div id="admin-app" class="hidden">
+      <header
+        class="sticky top-0 z-40 border-b border-slate-200/80 bg-white/95 backdrop-blur"
+      >
+        <div
+          class="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-3 px-4 py-3 sm:px-6"
+        >
+          <div>
+            <p class="text-[10px] font-semibold uppercase tracking-[0.18em] text-teal">
+              Admin
+            </p>
+            <h1 class="font-display text-lg font-bold text-ink sm:text-xl">
+              Editar conteúdo
+            </h1>
+          </div>
+          <div class="flex flex-wrap items-center gap-2">
+            <a
+              href="/"
+              target="_blank"
+              class="rounded-xl border border-slate-200 px-3 py-2 text-xs font-semibold text-ink-muted transition hover:border-teal hover:text-teal sm:text-sm"
+            >
+              Ver site
+            </a>
+            <button
+              type="button"
+              id="btn-save"
+              class="rounded-xl bg-sun px-4 py-2 text-xs font-bold uppercase tracking-wide text-ink shadow-sm transition hover:bg-sun-hover sm:text-sm"
+            >
+              Salvar alterações
+            </button>
+          </div>
+        </div>
+        <div id="save-status" class="hidden border-t px-4 py-2 text-center text-sm sm:px-6"></div>
+      </header>
+
+      <main class="mx-auto max-w-5xl px-4 py-8 sm:px-6 sm:py-10">
+        <div
+          class="mb-6 rounded-2xl border border-olive-light/50 bg-olive-soft/40 p-4 text-sm leading-relaxed text-ink-muted"
+        >
+          <strong class="text-ink">Como usar:</strong>
+          altere os campos abaixo e clique em
+          <strong class="text-ink">Salvar alterações</strong>.
+          O salvamento grava o arquivo no projeto quando o servidor de
+          desenvolvimento está rodando (<code class="rounded bg-white px-1">npm run dev</code>).
+          Depois faça o deploy para publicar no ar.
+          <br />
+          <span class="mt-1 block">
+            <strong class="text-ink">Imagens fixas</strong> (hero, resultados, passos, criadoras):
+            substitua os arquivos em
+            <code class="rounded bg-white px-1">src/assets/images/</code>
+            mantendo o mesmo nome.
+            <strong class="text-ink">Vídeos e posters</strong> ficam em
+            <code class="rounded bg-white px-1">public/videos/</code>
+            — você pode mudar o caminho nos campos abaixo.
+          </span>
+        </div>
+
+        <nav
+          class="mb-8 flex flex-wrap gap-2"
+          aria-label="Seções do painel"
+        >
+          <button type="button" data-jump="sec-site" class="admin-tab">Site &amp; preços</button>
+          <button type="button" data-jump="sec-hero" class="admin-tab">Hero</button>
+          <button type="button" data-jump="sec-video" class="admin-tab">Vídeo vendas</button>
+          <button type="button" data-jump="sec-results" class="admin-tab">Resultados</button>
+          <button type="button" data-jump="sec-videos" class="admin-tab">Depoimentos vídeo</button>
+          <button type="button" data-jump="sec-offer" class="admin-tab">Oferta</button>
+          <button type="button" data-jump="sec-faq" class="admin-tab">FAQ</button>
+          <button type="button" data-jump="sec-more" class="admin-tab">Mais seções</button>
+        </nav>
+
+        <div id="editor-root" class="space-y-8"></div>
+      </main>
+    </div>
+
+    <script is:inline define:vars={{ initial }}>
+      const AUTH_KEY = "ativa-admin-ok";
+      let data = JSON.parse(initial);
+
+      const loginScreen = document.getElementById("login-screen");
+      const adminApp = document.getElementById("admin-app");
+      const loginForm = document.getElementById("login-form");
+      const loginError = document.getElementById("login-error");
+      const editorRoot = document.getElementById("editor-root");
+      const saveStatus = document.getElementById("save-status");
+      const btnSave = document.getElementById("btn-save");
+
+      function showApp() {
+        loginScreen.classList.add("hidden");
+        adminApp.classList.remove("hidden");
+        renderEditor();
+      }
+
+      if (sessionStorage.getItem(AUTH_KEY) === "1") showApp();
+
+      loginForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const pwd = document.getElementById("login-password").value;
+        if (pwd === data.admin.password) {
+          sessionStorage.setItem(AUTH_KEY, "1");
+          loginError.classList.add("hidden");
+          showApp();
+        } else {
+          loginError.textContent = "Senha incorreta.";
+          loginError.classList.remove("hidden");
+        }
+      });
+
+      document.querySelectorAll("[data-jump]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const el = document.getElementById(btn.getAttribute("data-jump"));
+          if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+      });
+
+      function field(label, path, opts = {}) {
+        const { multiline = false, type = "text", hint = "" } = opts;
+        const id = "f-" + path.replace(/\./g, "-");
+        const value = getPath(data, path) ?? "";
+        const input = multiline
+          ? `<textarea id="${id}" data-path="${path}" rows="3" class="admin-input">${escapeHtml(String(value))}</textarea>`
+          : `<input id="${id}" data-path="${path}" type="${type}" value="${escapeAttr(String(value))}" class="admin-input" />`;
+        return `
+          <label class="block">
+            <span class="mb-1 block text-sm font-medium text-ink">${label}</span>
+            ${hint ? `<span class="mb-1.5 block text-xs text-ink-muted">${hint}</span>` : ""}
+            ${input}
+          </label>`;
+      }
+
+      function getPath(obj, path) {
+        return path.split(".").reduce((o, k) => (o == null ? undefined : o[k]), obj);
+      }
+
+      function setPath(obj, path, value) {
+        const keys = path.split(".");
+        let cur = obj;
+        for (let i = 0; i < keys.length - 1; i++) {
+          const k = keys[i];
+          if (cur[k] == null || typeof cur[k] !== "object") cur[k] = {};
+          cur = cur[k];
+        }
+        cur[keys[keys.length - 1]] = value;
+      }
+
+      function escapeHtml(s) {
+        return s
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;");
+      }
+
+      function escapeAttr(s) {
+        return s
+          .replace(/&/g, "&amp;")
+          .replace(/"/g, "&quot;")
+          .replace(/</g, "&lt;");
+      }
+
+      function card(id, title, body) {
+        return `
+          <section id="${id}" class="scroll-mt-24 rounded-3xl bg-white p-5 shadow-sm ring-1 ring-slate-100 sm:p-7">
+            <h2 class="font-display text-xl font-bold text-ink">${title}</h2>
+            <div class="mt-5 grid gap-4 sm:grid-cols-2">${body}</div>
+          </section>`;
+      }
+
+      function full(html) {
+        return `<div class="sm:col-span-2">${html}</div>`;
+      }
+
+      function renderEditor() {
+        const sp = data.socialProof;
+        const resultsHtml = sp.results
+          .map(
+            (r, i) => `
+          <div class="sm:col-span-2 rounded-2xl border border-slate-100 bg-surface p-4">
+            <p class="mb-3 text-xs font-bold uppercase tracking-wider text-teal">Resultado ${i + 1} · ${escapeHtml(r.name)}</p>
+            <div class="grid gap-3 sm:grid-cols-2">
+              ${field("Nome", `socialProof.results.${i}.name`)}
+              ${field("Idade", `socialProof.results.${i}.age`, { hint: 'Ex.: "45 anos"' })}
+              ${full(field("Depoimento", `socialProof.results.${i}.quote`, { multiline: true }))}
+              ${full(field("Texto alternativo da foto", `socialProof.results.${i}.alt`, { multiline: true }))}
+              ${field("Chave da imagem", `socialProof.results.${i}.imageKey`, { hint: "maristela | resultadoA | resultadoB" })}
+            </div>
+          </div>`,
+          )
+          .join("");
+
+        const videosHtml = sp.videoTestimonials
+          .map(
+            (v, i) => `
+          <div class="sm:col-span-2 rounded-2xl border border-slate-100 bg-surface p-4">
+            <p class="mb-3 text-xs font-bold uppercase tracking-wider text-teal">Vídeo ${i + 1} · ${escapeHtml(v.coverName || "")}</p>
+            <div class="grid gap-3 sm:grid-cols-2">
+              ${field("Nome na capa", `socialProof.videoTestimonials.${i}.coverName`, { hint: 'Ex.: "Priscila, 42 anos"' })}
+              ${field("CTA da capa", `socialProof.videoTestimonials.${i}.coverCta`)}
+              ${full(field("Frase na capa", `socialProof.videoTestimonials.${i}.coverQuote`, { multiline: true }))}
+              ${full(field("Título (acessibilidade)", `socialProof.videoTestimonials.${i}.title`))}
+              ${field("Arquivo do vídeo", `socialProof.videoTestimonials.${i}.src`, { hint: "Caminho em /public — ex.: /videos/depoimento-priscila.mp4" })}
+              ${field("Poster (capa)", `socialProof.videoTestimonials.${i}.poster`, { hint: "Ex.: /videos/depoimento-priscila-poster.webp" })}
+            </div>
+          </div>`,
+          )
+          .join("");
+
+        const faqHtml = data.faq.items
+          .map(
+            (item, i) => `
+          <div class="sm:col-span-2 rounded-2xl border border-slate-100 bg-surface p-4">
+            <p class="mb-3 text-xs font-bold uppercase tracking-wider text-teal">Pergunta ${i + 1}</p>
+            <div class="grid gap-3">
+              ${field("Pergunta", `faq.items.${i}.q`, { multiline: true })}
+              ${field("Resposta", `faq.items.${i}.a`, { multiline: true })}
+            </div>
+          </div>`,
+          )
+          .join("");
+
+        const forWhomHtml = data.forWhom.items
+          .map(
+            (_, i) => field(`Item ${i + 1}`, `forWhom.items.${i}`, { multiline: true }),
+          )
+          .join("");
+
+        const whatYouGetHtml = data.whatYouGet.items
+          .map(
+            (item, i) => `
+          <div class="sm:col-span-2 rounded-2xl border border-slate-100 bg-surface p-4">
+            <p class="mb-3 text-xs font-bold uppercase tracking-wider text-teal">Item ${i + 1}</p>
+            <div class="grid gap-3 sm:grid-cols-2">
+              ${full(field("Título", `whatYouGet.items.${i}.title`))}
+              ${full(field("Descrição", `whatYouGet.items.${i}.text`, { multiline: true }))}
+            </div>
+          </div>`,
+          )
+          .join("");
+
+        const stepsHtml = data.howItWorks.steps
+          .map(
+            (s, i) => `
+          <div class="sm:col-span-2 rounded-2xl border border-slate-100 bg-surface p-4">
+            <p class="mb-3 text-xs font-bold uppercase tracking-wider text-teal">Passo ${s.num}</p>
+            <div class="grid gap-3 sm:grid-cols-2">
+              ${field("Título", `howItWorks.steps.${i}.title`)}
+              ${field("Número", `howItWorks.steps.${i}.num`)}
+              ${full(field("Texto", `howItWorks.steps.${i}.text`, { multiline: true }))}
+              ${full(field("Alt da imagem", `howItWorks.steps.${i}.alt`, { multiline: true }))}
+            </div>
+          </div>`,
+          )
+          .join("");
+
+        editorRoot.innerHTML = [
+          card(
+            "sec-site",
+            "Site, preços e contato",
+            [
+              field("Título da aba do navegador", "meta.title"),
+              field("Descrição SEO", "meta.description", { multiline: true }),
+              field("Nome do método", "site.name"),
+              field("Link de checkout (Hotmart)", "site.checkoutUrl"),
+              field("Preço de (riscado)", "site.priceFrom"),
+              field("Preço por", "site.priceTo"),
+              field("Parcelas", "site.installments"),
+              field("Anos de acesso", "site.accessYears", { type: "number" }),
+              field("Dias de garantia", "site.guaranteeDays", { type: "number" }),
+              field("WhatsApp (exibição)", "site.whatsappDisplay"),
+              field("WhatsApp (número E.164)", "site.whatsappE164", {
+                hint: "Só números, com DDI — ex.: 5532984264132",
+              }),
+              full(
+                field("Mensagem padrão do WhatsApp", "site.whatsappMessage", {
+                  multiline: true,
+                }),
+              ),
+              field("Pixel da Meta (Facebook)", "site.metaPixelId", {
+                hint: "ID numérico do pixel — ex.: 793131076956074",
+              }),
+              field("Senha do painel", "admin.password", {
+                hint: "Guarde em local seguro. Altere após o primeiro uso.",
+              }),
+            ].join(""),
+          ),
+          card(
+            "sec-hero",
+            "Hero (capa da página)",
+            [
+              field("Linha pequena (eyebrow)", "hero.eyebrow"),
+              full(field("Título principal", "hero.title", { multiline: true })),
+              full(field("Alt da imagem", "hero.imageAlt", { multiline: true })),
+              full(field("Parágrafo 1", "hero.p1", { multiline: true })),
+              full(field("Parágrafo 2", "hero.p2", { multiline: true })),
+              field("Parágrafo 3 — antes do destaque", "hero.p3Before"),
+              field("Parágrafo 3 — destaque em negrito", "hero.p3Highlight"),
+              field("Parágrafo 3 — depois", "hero.p3After"),
+              full(field("Parágrafo 4", "hero.p4", { multiline: true })),
+              full(field("Texto do botão CTA", "hero.cta")),
+            ].join(""),
+          ),
+          card(
+            "sec-video",
+            "Vídeo de vendas",
+            [
+              field("Eyebrow", "videoSales.eyebrow"),
+              full(field("Título da seção", "videoSales.title", { multiline: true })),
+              field("Arquivo do vídeo", "videoSales.src"),
+              field("Poster", "videoSales.poster"),
+              field("Capa — eyebrow", "videoSales.coverEyebrow"),
+              field("Capa — título", "videoSales.coverTitle"),
+              field("Capa — destaque", "videoSales.coverTitleHighlight"),
+              field("Capa — CTA", "videoSales.coverCta"),
+              full(field("Caixa de destaque", "videoSales.highlight", { multiline: true })),
+              full(field("Texto de fechamento", "videoSales.closing", { multiline: true })),
+            ].join(""),
+          ),
+          card("sec-results", "Resultados (fotos + depoimentos)", resultsHtml),
+          card(
+            "sec-videos",
+            "Depoimentos em vídeo (capas)",
+            [
+              full(field("Título da seção", "socialProof.videosTitle")),
+              full(
+                field("Subtítulo", "socialProof.videosSubtitle", { multiline: true }),
+              ),
+              full(
+                field("Título da área de resultados", "socialProof.title", {
+                  multiline: true,
+                }),
+              ),
+              field("Eyebrow resultados", "socialProof.eyebrow"),
+              full(field("CTA da seção", "socialProof.cta")),
+              videosHtml,
+            ].join(""),
+          ),
+          card(
+            "sec-offer",
+            "Oferta",
+            [
+              field("Eyebrow", "offer.eyebrow"),
+              full(field("Título", "offer.title", { multiline: true })),
+              field("Rótulo do preço", "offer.priceLabel"),
+              full(field("CTA", "offer.cta")),
+              full(field("Título da garantia", "offer.guaranteeTitle")),
+              full(field("Texto da garantia", "offer.guaranteeText", { multiline: true })),
+            ].join(""),
+          ),
+          card("sec-faq", "Perguntas frequentes", faqHtml),
+          card(
+            "sec-more",
+            "Como funciona, para quem é, o que recebe, criadoras",
+            [
+              field("Como funciona — eyebrow", "howItWorks.eyebrow"),
+              full(field("Como funciona — título", "howItWorks.title")),
+              full(field("Como funciona — CTA", "howItWorks.cta")),
+              stepsHtml,
+              field("Para quem — eyebrow", "forWhom.eyebrow"),
+              full(field("Para quem — título", "forWhom.title")),
+              forWhomHtml,
+              field("O que recebe — eyebrow", "whatYouGet.eyebrow"),
+              full(field("O que recebe — título", "whatYouGet.title")),
+              whatYouGetHtml,
+              field("Criadoras — eyebrow", "creatorsSection.eyebrow"),
+              field("Criadoras — título", "creatorsSection.title"),
+              full(field("Criadoras — alt da foto", "creatorsSection.imageAlt")),
+              field("Lilian — nome", "creators.lilian.name"),
+              full(field("Lilian — bio", "creators.lilian.role", { multiline: true })),
+              field("Lilian — Instagram URL", "creators.lilian.instagram"),
+              field("Manu — nome", "creators.manu.name"),
+              full(field("Manu — bio", "creators.manu.role", { multiline: true })),
+              field("Manu — Instagram URL", "creators.manu.instagram"),
+            ].join(""),
+          ),
+        ].join("");
+
+        editorRoot.querySelectorAll("[data-path]").forEach((el) => {
+          const path = el.getAttribute("data-path");
+          const apply = () => {
+            let val = el.value;
+            if (path.endsWith("accessYears") || path.endsWith("guaranteeDays") || path.endsWith("year")) {
+              val = Number(val) || 0;
+            }
+            setPath(data, path, val);
+          };
+          el.addEventListener("input", apply);
+          el.addEventListener("change", apply);
+        });
+      }
+
+      function showStatus(msg, ok) {
+        saveStatus.classList.remove("hidden");
+        saveStatus.textContent = msg;
+        saveStatus.className =
+          "border-t px-4 py-2 text-center text-sm sm:px-6 " +
+          (ok
+            ? "border-teal/20 bg-teal-soft text-teal-deep"
+            : "border-red-200 bg-red-50 text-red-700");
+      }
+
+      btnSave.addEventListener("click", async () => {
+        btnSave.disabled = true;
+        btnSave.textContent = "Salvando…";
+        try {
+          const res = await fetch("/api/admin/save-content", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data),
+          });
+          const json = await res.json().catch(() => ({}));
+          if (!res.ok) {
+            throw new Error(json.error || "Falha ao salvar. Rode npm run dev.");
+          }
+          showStatus(
+            "Salvo com sucesso! Atualize a página do site (F5) para ver as mudanças. Faça deploy para publicar online.",
+            true,
+          );
+        } catch (err) {
+          showStatus(
+            err.message ||
+              "Não foi possível salvar. Use o painel com o servidor local (npm run dev).",
+            false,
+          );
+        } finally {
+          btnSave.disabled = false;
+          btnSave.textContent = "Salvar alterações";
+        }
+      });
+    </script>
+
+    <style is:global>
+      .admin-tab {
+        border-radius: 9999px;
+        border: 1px solid #e2e8f0;
+        background: #fff;
+        padding: 0.4rem 0.85rem;
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: #475569;
+        transition: 0.15s;
+      }
+      .admin-tab:hover {
+        border-color: #4a8a8a;
+        color: #2f5f5f;
+      }
+      .admin-input {
+        width: 100%;
+        border-radius: 0.75rem;
+        border: 1px solid #e2e8f0;
+        background: #f8fafc;
+        padding: 0.65rem 0.85rem;
+        font-size: 0.875rem;
+        outline: none;
+      }
+      .admin-input:focus {
+        border-color: #4a8a8a;
+        box-shadow: 0 0 0 3px rgba(74, 138, 138, 0.2);
+        background: #fff;
+      }
+      textarea.admin-input {
+        min-height: 4.5rem;
+        resize: vertical;
+        line-height: 1.45;
+      }
+    </style>
+  </body>
+</html>

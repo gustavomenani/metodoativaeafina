@@ -1,6 +1,7 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
+import { adminContentMiddleware } from './admin-content-middleware.mjs';
 
 // https://astro.build/config
 export default defineConfig({
@@ -14,6 +15,6 @@ export default defineConfig({
     domains: [],
   },
   vite: {
-    plugins: [tailwindcss()],
+    plugins: [tailwindcss(), adminContentMiddleware()],
   },
 });

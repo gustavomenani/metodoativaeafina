@@ -1,6 +1,8 @@
 ---
 import CtaButton from "../ui/CtaButton.astro";
-import { siteConfig } from "../../config/site";
+import { siteConfig, content } from "../../config/site";
+
+const o = content.offer;
 ---
 
 <section
@@ -23,18 +25,18 @@ import { siteConfig } from "../../config/site";
     <p
       class="reveal mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-olive-light"
     >
-      Oferta de lançamento
+      {o.eyebrow}
     </p>
 
     <h2
       id="oferta-title"
       class="reveal reveal-delay-1 font-display text-2xl font-bold leading-tight sm:text-3xl md:text-4xl"
     >
-      Garanta seu acesso ao Método Ativa &amp; Afina
+      {o.title}
     </h2>
 
     <div class="reveal reveal-delay-2 mt-8 rounded-3xl bg-white/10 p-6 backdrop-blur-sm sm:p-8">
-      <p class="text-sm text-white/70 sm:text-base">Preço Especial</p>
+      <p class="text-sm text-white/70 sm:text-base">{o.priceLabel}</p>
       <p class="mt-2 text-lg text-white/60 line-through sm:text-xl">
         De {siteConfig.price.from}
       </p>
@@ -42,16 +44,16 @@ import { siteConfig } from "../../config/site";
         por apenas {siteConfig.price.to}
       </p>
       <p class="mt-2 text-base font-medium text-white/90 sm:text-lg">
-        Em até 12x de R$&nbsp;13,43
+        {siteConfig.installments}
       </p>
       <p class="mt-3 text-sm text-white/70">
-        1 ano de acesso · Garantia de 7 dias
+        {siteConfig.accessYears} ano de acesso · Garantia de {siteConfig.guaranteeDays} dias
       </p>
     </div>
 
     <div class="reveal reveal-delay-3 mt-8 flex justify-center">
       <CtaButton
-        label="QUERO MEU ACESSO IMEDIATO AO ATIVA & AFINA"
+        label={o.cta}
         size="large"
         href={siteConfig.checkoutUrl}
       />
@@ -67,7 +69,7 @@ import { siteConfig } from "../../config/site";
       >
         <div class="leading-tight">
           <span class="block font-display text-2xl font-bold text-teal-deep"
-            >7</span
+            >{siteConfig.guaranteeDays}</span
           >
           <span class="block text-[9px] font-bold uppercase text-ink-muted"
             >dias</span
@@ -75,9 +77,8 @@ import { siteConfig } from "../../config/site";
         </div>
       </div>
       <p class="max-w-xs text-sm leading-relaxed text-white/85 sm:text-left">
-        <strong class="text-sun">Garantia Incondicional de 7 dias.</strong>
-        Se por qualquer motivo sentir que o método não é para você, basta
-        solicitar o reembolso.
+        <strong class="text-sun">{o.guaranteeTitle}</strong>
+        {o.guaranteeText}
       </p>
     </div>
   </div>

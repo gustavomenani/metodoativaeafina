@@ -7,75 +7,22 @@ import SectionTitle from "../ui/SectionTitle.astro";
 import resultadoA from "../../assets/images/resultados/resultado-a.webp";
 import resultadoB from "../../assets/images/resultados/resultado-b.webp";
 import maristela from "../../assets/images/resultados/maristela.webp";
+import { content } from "../../config/site";
 
-const results: {
-  image: ImageMetadata;
-  alt: string;
-  quote: string;
-  name: string;
-  age: string;
-}[] = [
-  {
-    image: maristela,
-    alt: "Antes e depois de Maristela com o Método Ativa & Afina.",
-    quote:
-      "Depois dos 40, achei que minha pochete não tinha mais solução. Treinava, fazia dieta e nada da pochete desaparecer. Com o Método Ativa e Afina consegui reduzir a projeção da barriga e melhorar minha postura.",
-    name: "Maristela",
-    age: "45 anos",
-  },
-  {
-    image: resultadoA,
-    alt: "Antes e depois de Lilian com o Método Ativa & Afina.",
-    quote:
-      "Como mãe, o que mais me impressionou foi perceber minha barriga mais firme e a cintura mais fina. O abdômen voltou para o lugar sem precisar perder peso e o estufamento acabou.",
-    name: "Lilian",
-    age: "41 anos",
-  },
-  {
-    image: resultadoB,
-    alt: "Antes e depois de Natália com o Método Ativa & Afina.",
-    quote:
-      "Em apenas 4 semanas, já perdi medidas na barriga. Mesmo acima do peso, minhas roupas voltaram a servir sem apertar.",
-    name: "Natália",
-    age: "40 anos",
-  },
-];
+const imageMap: Record<string, ImageMetadata> = {
+  maristela,
+  resultadoA,
+  resultadoB,
+};
 
-/** Quando os vídeos chegarem, preencha `src` (MP4 em /public/videos/) ou `embedUrl` (YouTube/Vimeo). */
-const videoTestimonials: {
-  title: string;
-  src?: string;
-  embedUrl?: string;
-  poster?: string;
-  coverName?: string;
-  coverQuote?: string;
-  coverCta?: string;
-}[] = [
-  {
-    title: "Depoimento em vídeo — Amanda, 35 anos",
-    src: "/videos/depoimento-amanda.mp4",
-    poster: "/videos/depoimento-amanda-poster.webp",
-    coverName: "Amanda, 35 anos",
-    coverQuote: "Eu sempre fui magrinha, mas aquela pochete não sumia de jeito nenhum.",
-    coverCta: "Assistir agora",
-  },
-  {
-    title: "Depoimento em vídeo — Luana, 30 anos",
-    src: "/videos/depoimento-luana.mp4",
-    poster: "/videos/depoimento-luana-poster.webp",
-    coverName: "Luana, 30 anos",
-    coverQuote: "Minha barriga estufava tanto que eu evitava certas roupas.",
-    coverCta: "Assistir agora",
-  },
-  {
-    title: "Depoimento em vídeo — Priscila, 38 anos",
-    src: "/videos/depoimento-priscila.mp4",
-    poster: "/videos/depoimento-priscila-poster.webp",
-    coverName: "Priscila, 38 anos",
-    coverQuote: "Achei que nunca mais perderia a barriga da gravidez.",
-    coverCta: "Assistir agora",
-  },
-];
+const sp = content.socialProof;
+
+const results = sp.results.map((item) => ({
+  ...item,
+  image: imageMap[item.imageKey] ?? maristela,
+}));
+
+const videoTestimonials = sp.videoTestimonials;
 ---
 
 <section
@@ -86,8 +33,8 @@ const videoTestimonials: {
   <div class="mx-auto max-w-6xl px-4 sm:px-6">
     <SectionTitle
       id="prova-social-title"
-      eyebrow="Resultados reais"
-      title="Veja o que acontece quando você ativa sua Cinta Modeladora Natural"
+      eyebrow={sp.eyebrow}
+      title={sp.title}
       class="mb-10 sm:mb-12"
     />
 
@@ -148,18 +95,17 @@ const videoTestimonials: {
       Deslize para o lado para ver mais resultados
     </p>
 
-    <!-- Depoimentos em vídeo (3 slots — vídeos chegam depois) -->
+    <!-- Depoimentos em vídeo -->
     <div class="mt-14 sm:mt-16" id="depoimentos">
       <h3
         class="reveal mb-2 text-center font-display text-xl font-bold text-ink sm:text-2xl md:text-3xl"
       >
-        Veja o que nossas alunas têm a dizer
+        {sp.videosTitle}
       </h3>
       <p
         class="reveal reveal-delay-1 mx-auto mb-8 max-w-xl text-center text-sm leading-relaxed text-ink-muted sm:text-base"
       >
-        Histórias reais de mulheres que transformaram a aparência da barriga com
-        o Método Ativa &amp; Afina.
+        {sp.videosSubtitle}
       </p>
 
       <div
@@ -179,7 +125,6 @@ const videoTestimonials: {
               <VideoEmbed
                 title={v.title}
                 src={v.src}
-                embedUrl={v.embedUrl}
                 poster={v.poster}
                 coverName={v.coverName}
                 coverQuote={v.coverQuote}
@@ -201,7 +146,7 @@ const videoTestimonials: {
 
     <div class="reveal mt-10 flex justify-center sm:mt-12">
       <CtaButton
-        label="QUERO TER ESSES RESULTADOS NA MINHA BARRIGA"
+        label={sp.cta}
         size="large"
       />
     </div>

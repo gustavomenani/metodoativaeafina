@@ -1,40 +1,9 @@
 ---
 import SectionTitle from "../ui/SectionTitle.astro";
+import { content } from "../../config/site";
 
-const faqs = [
-  {
-    q: "Quando começo a ver resultados?",
-    a: "Com consistência, muitas alunas percebem melhora na postura e firmeza abdominal a partir da 4ª semana. A partir da 6ª semana, a redução de medidas se torna mais visível.",
-  },
-  {
-    q: "Eu nunca treinei ou sou iniciante, eu consigo fazer o curso?",
-    a: "Com certeza! O método foi desenhado de forma simples e muito didática. As aulas são passo a passo para que qualquer mulher, mesmo começando do zero absoluto, consiga aprender e aplicar os exercícios corretamente.",
-  },
-  {
-    q: "Eu já treino pesado e faço dieta, esse método realmente vai me ajudar?",
-    a: "Sim! O erro da maioria das mulheres é achar que toda barriga se resolve apenas com queima de gordura ou com abdominais tradicionais. Se você treina e se alimenta bem, mas a sua barriga continua caída ou estufada para frente, o problema real está na fraqueza e na falta de ativação dos seus músculos profundos. O método vai direto na raiz do problema.",
-  },
-  {
-    q: "Eu tenho diástase, posso fazer o método?",
-    a: "Pode e deve! O Método Ativa & Afina ajuda muito você a conseguir gerir melhor a pressão interna da sua barriga e, com isso, melhorar a sua diástase de forma segura, devolvendo a firmeza que o seu abdômen perdeu.",
-  },
-  {
-    q: "Sou mãe recente, posso fazer o método?",
-    a: "Se você já passou pelo período de pós-parto inicial e foi devidamente liberada pelo seu médico nas consultas de rotina, você pode sim fazer o método. Ele é excelente para ajudar a recuperar a firmeza abdominal após a gravidez.",
-  },
-  {
-    q: "Preciso de algum equipamento?",
-    a: "Não. Você só precisa do seu corpo e de um pequeno espaço na sua casa. O método foi desenhado para ser prático e acessível.",
-  },
-  {
-    q: "Quanto tempo terei de acesso ao curso?",
-    a: "Você terá 1 ano de acesso para assistir no seu ritmo e repetir as aulas quantas vezes quiser.",
-  },
-  {
-    q: "E se eu não gostar do curso?",
-    a: "Você tem 7 dias de garantia incondicional, se por qualquer motivo sentir que o método não é para você.",
-  },
-];
+const faqSection = content.faq;
+const faqs = faqSection.items;
 ---
 
 <section
@@ -45,8 +14,8 @@ const faqs = [
   <div class="mx-auto max-w-2xl px-4 sm:px-6">
     <SectionTitle
       id="faq-title"
-      eyebrow="Dúvidas"
-      title="Perguntas Frequentes"
+      eyebrow={faqSection.eyebrow}
+      title={faqSection.title}
       class="mb-8 sm:mb-10"
     />
 

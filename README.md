@@ -31,15 +31,22 @@ npm run preview  # pré-visualiza o build
 3. Build command: `npm run build`
 4. Output: `dist`
 
-## Configuração rápida
+## Painel admin (editar textos e mídia)
+
+Com o servidor local rodando (`npm run dev`), abra:
+
+**http://localhost:4321/admin**
+
+- Senha padrão: `ativa2026` (altere no próprio painel)
+- Edite textos, idades das capas, preços, FAQ, caminhos de vídeo/poster
+- Clique em **Salvar alterações** (grava `src/data/content.json`)
+- Atualize a página do site e faça deploy para publicar
+
+Imagens do Hero, resultados, passos e criadoras: substitua os arquivos em `src/assets/images/` mantendo o **mesmo nome**.
 
 ### 1. Link de checkout (Hotmart)
 
-Edite `src/config/site.ts`:
-
-```ts
-checkoutUrl: "https://pay.hotmart.com/SEU_LINK",
-```
+No painel admin, seção **Site & preços**, ou em `src/data/content.json` (`site.checkoutUrl`).
 
 ### 2. Imagens
 
@@ -76,7 +83,9 @@ src/
   components/
     sections/      # Blocos da landing + Footer
     ui/            # CtaButton, VideoEmbed, SectionTitle, etc.
-  config/site.ts   # Preço, checkout, nome
+  config/site.ts   # Lê content.json (preço, checkout, etc.)
+  data/content.json # Conteúdo editável (painel /admin)
+  pages/admin/     # Painel visual de edição
   layouts/         # Layout base (fonts, SEO, script reveal)
   pages/           # Rotas
   scripts/         # scroll-reveal.ts
