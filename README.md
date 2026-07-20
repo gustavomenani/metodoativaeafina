@@ -37,10 +37,25 @@ Com o servidor local rodando (`npm run dev`), abra:
 
 **http://localhost:4321/admin**
 
-- Senha padrão: `ativa2026` (altere no próprio painel)
+### Credenciais (nunca no código)
+
+Login e senha ficam **somente** em variáveis de ambiente:
+
+| Variável | Uso |
+|---|---|
+| `ADMIN_USERNAME` | Usuário do painel |
+| `ADMIN_PASSWORD` | Senha forte |
+| `ADMIN_SESSION_SECRET` | Segredo para assinar o cookie de sessão |
+
+1. Copie `.env.example` → `.env` e preencha (local).
+2. Na **Vercel**: Project → Settings → Environment Variables → adicione as 3 chaves (Production e Preview).
+3. O arquivo `.env` **não** vai para o Git (está no `.gitignore`).
+
+Sessão: cookie HTTP-only assinado, válido por 12h. Sem login válido o painel não carrega o conteúdo editável.
+
 - Edite textos, idades das capas, preços, FAQ, caminhos de vídeo/poster
-- Clique em **Salvar alterações** (grava `src/data/content.json`)
-- Atualize a página do site e faça deploy para publicar
+- **Salvar** grava `src/data/content.json` em desenvolvimento (`npm run dev`)
+- Faça deploy para publicar online
 
 Imagens do Hero, resultados, passos e criadoras: substitua os arquivos em `src/assets/images/` mantendo o **mesmo nome**.
 
